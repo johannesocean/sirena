@@ -1,0 +1,7 @@
+.idea
+*.html
+*.pyc
+.idea/workspace.xml
+/sirena/exports/
+/venv
+__pycache__/

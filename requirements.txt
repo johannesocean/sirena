@@ -1,0 +1,8 @@
+requests
+statsmodels
+numpy
+PyYAML
+pandas
+matplotlib
+bokeh
+sklearn

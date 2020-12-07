@@ -1,0 +1,12 @@
+description: SAMSA-API Reader - Metadata regarding stations
+name: samsa
+attributes:
+    time_limit: open
+    filters:
+    - stationNetworkKey=havsvattenstand
+    fields:
+    - stationName
+    - ownerName
+    - wgs84Latitude
+    - wgs84Longitude
+reader: !!python/name:sirena.readers.samsa.SAMSAData ''

@@ -1,0 +1,229 @@
+"HAPARANDA":
+    ref_value_2000: 21.0
+    absolute_landlift: 5.3
+    complementary_time_serie: ''
+
+"FURUÖGRUND":
+    ref_value_2000: 17.7
+    absolute_landlift: 5.3
+
+"RATAN":
+    ref_value_2000: 19.2
+    absolute_landlift: 5.3
+
+"SKAGSUDDE":
+    ref_value_2000: 16.4
+    absolute_landlift: 5.3
+
+"DRAGHÄLLAN":
+    ref_value_2000: 16.2
+    absolute_landlift: 5.3
+
+"SPIKARNA":
+    ref_value_2000: 16.2
+    absolute_landlift: 5.3
+
+"BJÖRN":
+    ref_value_2000: 17.2
+    absolute_landlift: 5.3
+
+"FORSMARK":
+    ref_value_2000: 17.4
+    absolute_landlift: 5.3
+
+"STOCKHOLM":
+    ref_value_2000: 16.5
+    absolute_landlift: 5.3
+
+"LANDSORT NORRA":
+    ref_value_2000: 14.4
+    absolute_landlift: 5.3
+
+"LANDSORT":
+    ref_value_2000: 14.4
+    absolute_landlift: 5.3
+
+"MARVIKEN":
+    ref_value_2000: 15.0
+    absolute_landlift: 5.3
+
+"ARKÖ":
+    ref_value_2000: 15.0
+    absolute_landlift: 5.3
+
+"VISBY":
+    ref_value_2000: 11.5
+    absolute_landlift: 5.3
+
+"ÖLANDS NORRA UDDE":
+    ref_value_2000: 14.1
+    absolute_landlift: 5.3
+
+"OSKARSHAMN":
+    ref_value_2000: 14.1
+    absolute_landlift: 5.3
+
+"KUNGSHOLMSFORT":
+    ref_value_2000: 13.5
+    absolute_landlift: 5.3
+
+"SIMRISHAMN":
+    ref_value_2000: 14.3
+    absolute_landlift: 5.3
+
+"YSTAD":
+    ref_value_2000: 14.3
+    absolute_landlift: 5.3
+
+"SKANÖR":
+    ref_value_2000: 14.2
+    absolute_landlift: 5.3
+
+"KLAGSHAMN":
+    ref_value_2000: 11.8
+    absolute_landlift: 5.3
+
+"MALMÖ":
+    ref_value_2000: 11.4
+    absolute_landlift: 5.3
+
+"BARSEBÄCK":
+    ref_value_2000: 11.0
+    absolute_landlift: 5.3
+
+"VIKEN":
+    ref_value_2000: 6.1
+    absolute_landlift: 5.3
+
+"ÄNGELHOLM":
+    ref_value_2000: 6.1
+    absolute_landlift: 5.3
+
+"VARBERG":
+    ref_value_2000: 5.9
+    absolute_landlift: 5.3
+
+"RINGHALS":
+    ref_value_2000: 5.9
+    absolute_landlift: 5.3
+
+"ONSALA":
+    ref_value_2000: 5.9
+    absolute_landlift: 5.3
+
+"GÖTEBORG-ERIKSBERG":
+    ref_value_2000: 8.3
+    absolute_landlift: 5.3
+
+"GÖTEBORG-GÖTAÄLVBRON":
+    ref_value_2000: 10.8
+    absolute_landlift: 5.3
+
+"GÖTEBORG-TINGSTADSTUNNELN":
+    ref_value_2000: 11.1
+    absolute_landlift: 5.3
+
+"GÖTEBORG-LÄRJEHOLM":
+    ref_value_2000: 16.9
+    absolute_landlift: 5.3
+
+"GÖTEBORG-AGNESBERG":
+    ref_value_2000: 18.3
+    absolute_landlift: 5.3
+
+"STENUNGSUND":
+    ref_value_2000: 1.7
+    absolute_landlift: 5.3
+
+"UDDEVALLA":
+    ref_value_2000: 0.7
+    absolute_landlift: 5.3
+
+"KRISTINEBERG":
+    ref_value_2000: -0.4
+    absolute_landlift: 5.3
+
+"SMÖGEN":
+    ref_value_2000: -0.8
+    absolute_landlift: 5.3
+
+"KUNGSVIK":
+    ref_value_2000: -1.0
+    absolute_landlift: 5.3
+
+station_list:
+- "HAPARANDA"
+- "KALIX KARLSBORG"
+- "KALIX STORÖ"
+- "STRÖMÖREN"
+- "FURUÖGRUND"
+- "GÅSÖREN"
+- "RATAN"
+- "HOLMSUND"
+- "SKAGSUDDE"
+- "SKAGSUDDE2"
+- "LUNDE"
+- "DRAGHÄLLAN"
+- "SPIKARNA"
+- "LJUSNE ORRSKÄRSKAJEN"
+- "BÖNAN"
+- "BJÖRN"
+- "FORSMARK"
+- "LOUDDEN"
+- "STOCKHOLM"
+- "NYNÄS FISKEHAMN"
+- "LANDSORT NORRA"
+- "LANDSORT"
+- "E4 BRON SÖDERTÄLJE"
+- "OXELÖSUND VINTERKLASEN"
+- "JUTEN"
+- "MARVIKEN"
+- "ARKÖ"
+- "VÄSTERVIK"
+- "SLITE"
+- "VISBY"
+- "SIMPEVARP"
+- "ÖLANDS NORRA UDDE"
+- "OSKARSHAMN"
+- "KALMAR"
+- "KUNGSHOLMSFORT"
+- "KARLSHAMN"
+- "ÅHUS"
+- "SIMRISHAMN"
+- "YSTAD"
+- "YSTAD2"
+- "SKANÖR"
+- "KLAGSHAMN"
+- "FLINTEN 16"
+- "FLINTEN 7"
+- "MALMÖ HAMN"
+- "MALMÖ"
+- "BARSEBÄCK"
+- "HELSINGBORG"
+- "VIKEN"
+- "ÄNGELHOLM"
+- "HALMSTAD"
+- "FALKENBERG"
+- "VARBERG"
+- "VARBERG2"
+- "RINGHALS"
+- "ONSALA"
+- "VINGA2"
+- "MÅVHOLMSBÅDAN"
+- "GBG-TORSHAMNEN"
+- "TÅNGUDDEN GBG HAMN"
+- "GÖTEBORG-ÄLVSBORGSBRON"
+- "GÖTEBORG-KLIPPAN"
+- "GÖTEBORG-ERIKSBERG"
+- "GÖTEBORG-GÖTAÄLVBRON"
+- "GÖTEBORG-RINGÖN"
+- "GÖTEBORG-TINGSTADSTUNNELN"
+- "GÖTEBORG-LÄRJEHOLM"
+- "GÖTEBORG-AGNESBERG"
+- "MARSTRAND"
+- "STENUNGSUND"
+- "UDDEVALLA"
+- "KRISTINEBERG"
+- "BROFJORDEN"
+- "SMÖGEN"
+- "KUNGSVIK"

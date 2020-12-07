@@ -1,0 +1,53 @@
+reader:
+    description: Wiski DB Reader for sealevel data (SMHI)
+    name: wiski
+    default_channels: []
+    reader: !!python/name:sirena.readers.yaml_reader.YAMLreader ''
+
+data_types:
+    wiski_data:
+        reader: !!python/name:sirena.readers.wiski.WiskiData ''
+        attributes: {'server': None}
+    wiski_geo:
+        reader: !!python/name:sirena.readers.wiski.WiskiGeo ''
+        attributes: {'server': None}
+    wiski_stations:
+        reader: !!python/name:sirena.readers.wiski.WiskiStationRegister ''
+
+datasets:
+    annual_RH2000_mean:
+        parameter: RH2000
+        data_type: wiski_data
+        channels: ["Year.Mean"]
+        units: cm
+    annual_RH2000:
+        parameter: RH2000
+        data_type: wiski_data
+        channels: ["Year.Mean", "Year.Max", "Year.Min"]
+        units: cm
+    monthly_RH2000:
+        parameter: RH2000
+        data_type: wiski_data
+        channels: ["Month.Mean", "Month.Max", "Month.Min"]
+        units: cm
+    daily_RH2000:
+        parameter: RH2000
+        data_type: wiski_data
+        channels: ["Day.Mean", "Day.Max", "Day.Min"]
+        units: cm
+    RW:
+        name: RW
+        data_type: wiski_data
+        channels: ["Year.Mean"]
+        units: cm
+    longitude:
+        name: longitude
+        data_type: wiski_geo
+        units: degree
+    latitude:
+        name: latitude
+        data_type: wiski_geo
+        units: degree
+    stations:
+        name: stations
+        data_type: wiski_stations

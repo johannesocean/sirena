@@ -15,6 +15,10 @@ from sirena.core.calculator import Statistics
 
 class Session:
     """
+    # TODO:
+        1. Beräkning:
+        2. csv export av stationer med valid tidsserie
+
     """
     def __init__(self, reader=None, station_source=None, start_time=None, end_time=None):
         self.settings = Settings()

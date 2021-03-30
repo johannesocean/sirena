@@ -108,7 +108,7 @@ class Settings:
         :param etc_path: str, local path to settings
         :return: Updates attributes of self
         """
-        paths = generate_filepaths(etc_path, pattern='.yaml')
+        paths = generate_filepaths(etc_path, endswith='.yaml')
         settings = YAMLreader().load_yaml(
             paths,
             file_names_as_key=True,
@@ -118,6 +118,8 @@ class Settings:
         subdirectories = get_subdirectories(etc_path)
 
         for subdir in subdirectories:
+            if subdir == 'templates':
+                continue
             subdir_path = os.path.join(etc_path, subdir)
             paths = get_filepaths_from_directory(subdir_path)
             sub_settings = YAMLreader().load_yaml(
@@ -134,7 +136,7 @@ class Settings:
         """
         if not os.path.exists(self.settings['paths'].get('server_info_path')):
             raise ImportError(
-                'Could not find any settings paths. You need to copy sirena_srv.json into the folder: {} '
+                'Could not find any settings paths. You need to copy srv.json into the folder: {} '
                 '(or set your own local folder of your choosing). You can get this file from JJ.'.format(
                     self.settings['paths'].get('server_info_path')))
 

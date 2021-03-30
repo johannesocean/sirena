@@ -12,19 +12,20 @@ from sirena.session import Session
 from sirena.plotting.widgets import Plot
 
 
-session_obj = Session(
-    reader='wiski',
-    station_source='wiski',
-    start_time='1700-01-01',
-    end_time='2019-12-31',
-)
+if __name__ == '__main__':
+    session_obj = Session(
+        reader='wiski',
+        station_source='wiski',
+        start_time='1700-01-01',
+        end_time='2019-12-31',
+    )
 
-selected_dataset = 'annual_RH2000'
-print('Read data..')
-start_time = time.time()
-dfs = session_obj.read(
-    all_stations=True,
-    datasets=[selected_dataset],
-)
+    selected_dataset = 'annual_RH2000'
+    print('Read data..')
+    # start_time = time.time()
+    # dfs = session_obj.read(
+    #     all_stations=True,
+    #     datasets=[selected_dataset],
+    # )
 
-# session_obj.stations['RATAN']
+    # session_obj.stations['RATAN']

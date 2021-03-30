@@ -1,0 +1,13 @@
+description: Writer for excel template
+name: xlsx_template
+writer: !!python/name:sirena.writers.excel_template.ExcelTemplateWriter ''
+template_path:
+start_row_index: 9
+coordinate_format: f"{}° {}' {}''"
+cell_mapping:
+    number: f"A{}"
+    stations: f"B{}"
+    longitude: f"C{}"
+    latitude: f"D{}"
+    annual_mean: f"G{}"
+    k_value: f"I{}"

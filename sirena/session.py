@@ -86,24 +86,30 @@ class Session:
         reader_instance = data_type.get('reader')
         return reader_instance()
 
-    def read(self, **kwargs):
+    def write(self, writer=None, writer_kwargs=None, **kwargs):
         """"""
-        selected_datasets = kwargs.get('datasets') or ['annual_RH2000']
+        writer_kwargs = writer_kwargs or {}
+        for key, item in self.settings.writers[writer].items():
+            writer_kwargs.setdefault(key, item)
+
+        writer_instance = writer_kwargs['writer'](**writer_kwargs)
+
+
+    def read(self, datasets=None, stations=None, all_stations=None,  **kwargs):
+        """"""
+        selected_datasets = datasets or ['annual_RH2000']
         data_dictionary = {}
         for dataset_setting in selected_datasets:
             reader_container = self.readers[dataset_setting]
 
-            if kwargs.get('all_stations'):
+            if all_stations:
                 station_list = self.settings.stations.get('station_list')
-            elif kwargs.get('stations'):
-                station_list = kwargs.get('stations')
+            elif stations:
+                station_list = stations
             else:
-                raise AssertionError('NO DESIGNATED STATION LIST! {} ?'.format(kwargs.get('stations')))
+                raise AssertionError('NO DESIGNATED STATION LIST! {} ?'.format(stations))
 
-            datasets = self._read_datasets(
-                reader_container,
-                station_list
-            )
+            datasets = self._read_datasets(reader_container, station_list)
             data_dictionary[dataset_setting] = datasets
 
         return data_dictionary
@@ -164,12 +170,6 @@ class Session:
         return dfs
 
     def get_statistics(self, dataframes, parameter=None, stats_for_year=None):
-        """
-
-        :param dataframes:
-        :param stats_for_year:
-        :return:
-        """
         stat_obj = Statistics(calculation_year=stats_for_year)
 
         for key, df in dataframes.items():
@@ -183,7 +183,4 @@ class Session:
 
     @property
     def time_window(self):
-        """
-        :return: tuple of start- and end-time
-        """
         return self.start_time, self.end_time

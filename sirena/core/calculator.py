@@ -14,16 +14,18 @@ from statsmodels.sandbox.regression.predstd import wls_prediction_std
 from statsmodels.stats.outliers_influence import summary_table
 from sklearn.preprocessing import PolynomialFeatures
 
+
 from sirena.utils import round_value
 
 
 class AnnualMeanEquation:
     """
     """
-    def __init__(self, *args, **kwargs):
-        self.ref_value = kwargs.get('ref_value_2000') or np.nan
-        self.k = kwargs.get('k_value') * -1 or np.nan
-        self.year = kwargs.get('year') or np.nan
+    def __init__(self, *args, ref_value_2000=None, k_value=None, year=None, **kwargs):
+        self.ref_value = ref_value_2000 or np.nan
+        self.k = k_value or np.nan
+        self.year = year or np.nan
+        # print('self.ref_value, self.k, self.year', self.ref_value, self.k, self.year)
 
     def __call__(self):
         """
@@ -44,8 +46,6 @@ class AnnualMeanEquation:
         return '='*65
 
     def get_summary_string(self, summary):
-        """
-        """
         start_idx = summary.find('* The condition') - 1
         return '\n'.join((
             summary[:start_idx],
@@ -58,8 +58,6 @@ class AnnualMeanEquation:
 
     @property
     def equation_string(self):
-        """
-        """
         return '{} = {} - {} * ({}-2000)'.format(
             round(self.calculated, 3),
             self.ref_value,
@@ -69,21 +67,19 @@ class AnnualMeanEquation:
 
     @property
     def calculation_string(self):
-        """
-        """
         return 'SMHI calculation:    M_(yyyy) = ref_value_2000 - k * (yyyy-2000)'
 
 
 class OLSEquation:
     """
     """
-    def __init__(self, *args, **kwargs):
+    def __init__(self, *args, data=None, parameter=None, **kwargs):
         """
         :param args:
         :param kwargs:
         """
-        self.df = kwargs.get('data')
-        self.parameter = kwargs.get('parameter')
+        self.df = data
+        self.parameter = parameter
         qf_boolean = self.df[self.parameter].isna()
         if qf_boolean.any():
             self.df.drop(self.df[qf_boolean].index, inplace=True)
@@ -100,20 +96,50 @@ class OLSEquation:
         return res
 
 
+class OLSLinearRegression:
+    """
+    """
+    def __init__(self, *args, data=None, parameter=None, **kwargs):
+        """
+        :param args:
+        :param kwargs:
+        """
+        self.df = data
+        self.parameter = parameter
+        qf_boolean = self.df[self.parameter].isna()
+        if qf_boolean.any():
+            self.df.drop(self.df[qf_boolean].index, inplace=True)
+
+    def __call__(self):
+        """
+        :return:
+        """
+        x = self.df['year'].values
+        y = self.df[self.parameter].values
+
+        x = x[:, np.newaxis]
+        y = y[:, np.newaxis]
+
+        x = sm.add_constant(x)
+        res = sm.OLS(y, x).fit()
+
+        return res
+
+
 class OLSPolynomialRegression:
     """
     Source:
     https://ostwalprasad.github.io/machine-learning/Polynomial-Regression-using-statsmodel.html
 
     """
-    def __init__(self, *args, **kwargs):
+    def __init__(self, *args, data=None, parameter=None, polynomial_degree=None, **kwargs):
         """
         :param args:
         :param kwargs:
         """
-        self.df = kwargs.get('data')
-        self.parameter = kwargs.get('parameter')
-        self.polynomial_degree = kwargs.get('polynomial_degree') or 2
+        self.df = data
+        self.parameter = parameter
+        self.polynomial_degree = polynomial_degree or 2
         qf_boolean = self.df[self.parameter].isna()
         if qf_boolean.any():
             self.df.drop(self.df[qf_boolean].index, inplace=True)
@@ -138,7 +164,6 @@ class OLSPolynomialRegression:
 
 class CalculatorBase:
     """
-
     """
     def __init__(self):
         super().__init__()
@@ -150,17 +175,12 @@ class CalculatorBase:
             self.attributes.add(key)
 
     def update_attributes(self, **kwargs):
-        """
-        :param kwargs:
-        :return:
-        """
         for attribute, value in kwargs.items():
             setattr(self, attribute, value)
 
 
 class Calculator(CalculatorBase):
     """
-
     """
     def __init__(self, calculation_year=None):
         super().__init__()
@@ -179,12 +199,6 @@ class Calculator(CalculatorBase):
 
     @staticmethod
     def get_regression_summary(result, conf_int=0.95, columns=None, as_dataframe=False):
-        """
-        :param result:
-        :param conf_int:
-        :param as_dataframe:
-        :return:
-        """
         column_mapper = {
             'Obs': 'obs',
             'Dep Var\nPopulation': 'dep_var_population',
@@ -206,10 +220,6 @@ class Calculator(CalculatorBase):
             return pd.DataFrame(data_table, columns=table_columns)
 
     def calculate_running_mean(self, data, parameter):
-        """
-
-        :return:
-        """
         running_mean = data[parameter].rolling(
             31,
             center=True,
@@ -219,17 +229,20 @@ class Calculator(CalculatorBase):
         self.update_attributes(running_mean=running_mean)
 
     def calculate_annual_mean_water_level(self, station_attr):
-        """
-        :param station_attr:
-        :return:
-        """
         if station_attr:
+            try:
+                k = float(round_value(self.result.params[1], nr_decimals=2)) * -1 or np.nan
+            except IndexError:
+                k = np.nan
+
             station_attr.setdefault('ref_value_2000', np.nan)
-            station_attr.setdefault('k_value', round_value(self.result.params[0]) or None)
+            station_attr.setdefault('k_value', k)
             station_attr.setdefault('year', self.calc_year or None)
 
             am = AnnualMeanEquation(**station_attr)
             res = am()
+
+            station_attr.setdefault('annual_mean', round_value(res, nr_decimals=1))
 
             self.update_attributes(
                 annual_mean=res,
@@ -237,17 +250,18 @@ class Calculator(CalculatorBase):
             )
 
     def calculate_stats(self, data, parameter):
-        """
-        :param data:
-        :return:
-        """
         data = data.assign(intercept=1., year=lambda x: x.timestamp.dt.year)
 
-        ols = OLSPolynomialRegression(
+        # ols = OLSPolynomialRegression(
+        #     data=data,
+        #     parameter=parameter,
+        #     polynomial_degree=2
+        # )
+        ols = OLSLinearRegression(
             data=data,
             parameter=parameter,
-            polynomial_degree=2
         )
+
         res = ols()
 
         reg_sum = self.get_regression_summary(
@@ -273,14 +287,11 @@ class Statistics(dict):
     Dictionary of stations with applied calculations
     """
     def __init__(self, calculation_year=None):
+        super().__init__()
         self.calc_year = calculation_year or datetime.now().year
         print('Calculate annual mean water level for year {}'.format(self.calc_year))
 
     def append_new_station(self, **kwargs):
-        """
-        :param kwargs:
-        :return:
-        """
         name = kwargs.get('name')
         if name:
             print('New station added: {}'.format(name))

@@ -146,15 +146,15 @@ def find_key(key, dictionary):
                         yield result
 
 
-def generate_filepaths(directory, pattern=''):
+def generate_filepaths(directory, endswith=''):
     """
     :param directory: str, directory path
-    :param pattern: str
+    :param endswith: str
     :return: generator
     """
     for path, subdir, fids in os.walk(directory):
         for f in fids:
-            if pattern in f:
+            if f.endswith(endswith):
                 yield os.path.abspath(os.path.join(path, f))
 
 

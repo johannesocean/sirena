@@ -16,7 +16,7 @@ session_obj = Session(
     reader='wiski',
     station_source='wiski',
     start_time='1700-01-01',
-    end_time='2019-12-31',
+    end_time='2020-12-31',
 )
 
 selected_dataset = 'annual_RH2000'
@@ -36,10 +36,10 @@ stats = session_obj.get_statistics(
 
 session_obj.update_station_info()
 
-pp = Plot(
-    stations=session_obj.stations,
-    statistics=stats,
-    output_filename=os.path.join(session_obj.settings.base_directory, "export", "SMISK_VIZ_tst.html")
-)
-
-pp.show_plot()
+# pp = Plot(
+#     stations=session_obj.stations,
+#     statistics=stats,
+#     output_filename=os.path.join(session_obj.settings.base_directory, "export", "SMISK_VIZ_tst.html")
+# )
+#
+# pp.show_plot()

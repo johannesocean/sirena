@@ -7,6 +7,7 @@ Created on 2020-04-07 10:28
 
 """
 import os
+from pathlib import Path
 from sirena.readers.yaml_reader import YAMLreader
 from sirena.readers.json_reader import JSONreader
 from sirena.utils import generate_filepaths, get_subdirectories, get_filepaths_from_directory
@@ -71,8 +72,10 @@ class Settings:
         self.writers = None
         self.stations = None
         self.base_directory = os.path.dirname(os.path.realpath(__file__))
+        self.export_path = os.path.join(self.base_directory, 'export')
         etc_path = os.path.join(self.base_directory, 'etc')
         self._load_settings(etc_path)
+        self._add_base_dir_to_paths()
         self._load_server_info()
 
     def __setattr__(self, name, value):
@@ -84,8 +87,8 @@ class Settings:
         """
         if name == 'dir_path':
             pass
-        elif isinstance(value, str) and 'path' in name:
-            name = os.path.join(self.base_directory, value)
+        # elif isinstance(value, str) and 'path' in name:
+        #     name = os.path.join(self.base_directory, value)
         elif isinstance(value, dict) and 'paths' in name:
             self._check_for_paths(value)
         super().__setattr__(name, value)
@@ -118,7 +121,7 @@ class Settings:
         subdirectories = get_subdirectories(etc_path)
 
         for subdir in subdirectories:
-            if subdir == 'templates':
+            if subdir in ['templates', 'icons']:
                 continue
             subdir_path = os.path.join(etc_path, subdir)
             paths = get_filepaths_from_directory(subdir_path)
@@ -129,6 +132,12 @@ class Settings:
             )
             self._check_for_paths(sub_settings)
             self._set_sub_object(subdir, sub_settings)
+
+    def _add_base_dir_to_paths(self):
+        for key in self.settings['paths']:
+            if key == 'server_info_path':
+                continue
+            self.settings['paths'][key] = Path(self.base_directory).joinpath(self.settings['paths'][key])
 
     def _load_server_info(self):
         """

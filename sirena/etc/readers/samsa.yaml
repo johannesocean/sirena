@@ -9,4 +9,5 @@ attributes:
     - ownerName
     - wgs84Latitude
     - wgs84Longitude
+    - attributes
 reader: !!python/name:sirena.readers.samsa.SAMSAData ''

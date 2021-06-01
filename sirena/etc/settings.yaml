@@ -1,2 +1,3 @@
 paths:
     server_info_path: 'C:/SIRENA/srv.json'
+    xlsx_template: 'etc/templates/mwreg.xlsx'

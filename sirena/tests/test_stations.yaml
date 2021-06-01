@@ -1,0 +1,305 @@
+"ARK\xD6":
+    absolute_landlift: 5.3
+    template_latitude: "58\xB0 29' 03''"
+    template_longitude: "16\xB0 57' 38''"
+    template_name: "ARK\xD6 (SMHI)"
+    template_number: 2545/33085
+"BARSEB\xC4CK":
+    absolute_landlift: 5.3
+    template_latitude: "55\xB0 45' 23''"
+    template_longitude: "12\xB0 54' 12''"
+    template_name: "BARSEB\xC4CK (SMHI)"
+    template_number: 2099/33067
+"BJ\xD6RN":
+    absolute_landlift: 5.3
+    template_latitude: "60\xB0 38' 00''"
+    template_longitude: "17\xB0 58' 00''"
+    template_name: "Bj\xF6rn (SMHI) nedlagd"
+    template_number: 2067/33075
+"DRAGH\xC4LLAN":
+    absolute_landlift: 5.3
+    template_latitude: "62\xB0 20' 00''"
+    template_longitude: "17\xB0 28' 00''"
+    template_name: "Dragh\xE4llan (SMHI) nedlagd"
+    template_number: 2062/33074
+FORSMARK:
+    absolute_landlift: 5.3
+    template_latitude: "60\xB0 24' 31''"
+    template_longitude: "18\xB0 12' 39''"
+    template_name: FORSMARK (SMHI)
+    template_number: 2179/33056
+"FURU\xD6GRUND":
+    absolute_landlift: 5.3
+    template_latitude: "64\xB0 54' 57''"
+    template_longitude: "21\xB0 13' 50''"
+    template_name: "FURU\xD6GRUND (SMHI)"
+    template_number: 2055/33052
+"G\xD6TEBORG-AGNESBERG":
+    absolute_landlift: 5.3
+    template_latitude: "57\xB0 47' 23''"
+    template_longitude: "12\xB0 00' 36''"
+    template_name: "G\xD6TEBORG-AGNESBERG (GBG)"
+    template_number: '33095'
+"G\xD6TEBORG-ERIKSBERG":
+    absolute_landlift: 5.3
+    template_latitude: "57\xB0 41' 48''"
+    template_longitude: "11\xB0 54' 32''"
+    template_name: "G\xD6TEBORG-ERIKSBERG (GBG)"
+    template_number: '33096'
+"G\xD6TEBORG-G\xD6TA\xC4LVBRON":
+    absolute_landlift: 5.3
+    template_latitude: "57\xB0 42' 53''"
+    template_longitude: "11\xB0 58' 01''"
+    template_name: "G\xD6TEBORG-G\xD6TA\xC4LVBRON (GBG)"
+    template_number: '33092'
+"G\xD6TEBORG-L\xC4RJEHOLM":
+    absolute_landlift: 5.3
+    template_latitude: "57\xB0 45' 57''"
+    template_longitude: "12\xB0 00' 20''"
+    template_name: "G\xD6TEBORG-L\xC4RJEHOLM (GBG)"
+    template_number: '33094'
+"G\xD6TEBORG-TINGSTADSTUNNELN":
+    absolute_landlift: 5.3
+    template_latitude: "57\xB0 43' 23''"
+    template_longitude: "11\xB0 59' 13''"
+    template_name: "G\xD6TEBORG-TINGSTADSTUNNELN (GBG)"
+    template_number: '33093'
+HAPARANDA:
+    absolute_landlift: 5.3
+    complementary_time_serie: ''
+    template_latitude: "65\xB0 46' 18''"
+    template_longitude: "23\xB0 54' 11''"
+    template_name: Haparanda (SMHI) nedlagd
+    template_number: 2588/33088
+KLAGSHAMN:
+    absolute_landlift: 5.3
+    template_latitude: "55\xB0 31' 20''"
+    template_longitude: "12\xB0 53' 37''"
+    template_name: KLAGSHAMN (SMHI)
+    template_number: 2095/33066
+KRISTINEBERG:
+    absolute_landlift: 5.3
+    template_latitude: "58\xB0 15' 00''"
+    template_longitude: "11\xB0 27' 00''"
+    template_name: KRISTINEBERG (GU)
+    template_number: '33099'
+KUNGSHOLMSFORT:
+    absolute_landlift: 5.3
+    template_latitude: "56\xB0 06' 19''"
+    template_longitude: "15\xB0 35' 22''"
+    template_name: KUNGSHOLMSFORT (SMHI)
+    template_number: 2088/33063
+KUNGSVIK:
+    absolute_landlift: 5.3
+    template_latitude: "58\xB0 59' 48''"
+    template_longitude: "11\xB0 07' 38''"
+    template_name: KUNGSVIK (SMHI)
+    template_number: 2130/33073
+LANDSORT:
+    absolute_landlift: 5.3
+    template_latitude: "58\xB0 46' 08''"
+    template_longitude: "17\xB0 51' 32''"
+    template_name: LANDSORT NORRA (SMHI)
+    template_number: 2507/33058
+LANDSORT NORRA:
+    absolute_landlift: 5.3
+    template_latitude: "58\xB0 46' 08''"
+    template_longitude: "17\xB0 51' 32''"
+    template_name: LANDSORT NORRA (SMHI)
+    template_number: 2507/33058
+"MALM\xD6":
+    absolute_landlift: 5.3
+    template_latitude: "55\xB0 36' 49''"
+    template_longitude: "12\xB0 59' 51''"
+    template_name: "MALM\xD6 HAMN (SJ\xD6V)"
+    template_number: 68/35152
+MARVIKEN:
+    absolute_landlift: 5.3
+    template_latitude: "58\xB0 33' 13''"
+    template_longitude: "16\xB0 50' 14''"
+    template_name: Marviken (SMHI) nedlagd
+    template_number: 2076/33059
+ONSALA:
+    absolute_landlift: 5.3
+    template_latitude: "57\xB0 23' 31''"
+    template_longitude: "11\xB0 55' 09''"
+    template_name: ONSALA (CTH)
+    template_number: 2544/33084
+OSKARSHAMN:
+    absolute_landlift: 5.3
+    template_latitude: "57\xB0 16' 30''"
+    template_longitude: "16\xB0 28' 41''"
+    template_name: OSKARSHAMN (SMHI)
+    template_number: 2085/33062
+RATAN:
+    absolute_landlift: 5.3
+    template_latitude: "63\xB0 59' 10''"
+    template_longitude: "20\xB0 53' 42''"
+    template_name: RATAN (SMHI)
+    template_number: 2056/33053
+RINGHALS:
+    absolute_landlift: 5.3
+    template_latitude: "57\xB0 14' 59''"
+    template_longitude: "12\xB0 06' 45''"
+    template_name: RINGHALS (SMHI)
+    template_number: 2105/33069
+SIMRISHAMN:
+    absolute_landlift: 5.3
+    template_latitude: "55\xB0 33' 27''"
+    template_longitude: "14\xB0 21' 28''"
+    template_name: SIMRISHAMN (SMHI)
+    template_number: 2320/33064
+SKAGSUDDE:
+    absolute_landlift: 5.3
+    template_latitude: "63\xB0 11' 26''"
+    template_longitude: "19\xB0 00' 45''"
+    template_name: Skagsudde (SMHI) nedlagd
+    template_number: 2321/33054
+"SKAN\xD6R":
+    absolute_landlift: 5.3
+    template_latitude: "55\xB0 25' 00''"
+    template_longitude: "12\xB0 49' 47''"
+    template_name: "SKAN\xD6R (SMHI)"
+    template_number: 30488/33065
+"SM\xD6GEN":
+    absolute_landlift: 5.3
+    template_latitude: "58\xB0 21' 13''"
+    template_longitude: "11\xB0 13' 04''"
+    template_name: "SM\xD6GEN (SMHI)"
+    template_number: 2111/33072
+SPIKARNA:
+    absolute_landlift: 5.3
+    template_latitude: "62\xB0 21' 48''"
+    template_longitude: "17\xB0 31' 52''"
+    template_name: SPIKARNA (SMHI)
+    template_number: 2061/33055
+STENUNGSUND:
+    absolute_landlift: 5.3
+    template_latitude: "58\xB0 05' 36''"
+    template_longitude: "11\xB0 49' 57''"
+    template_name: STENUNGSUND (SMHI)
+    template_number: 2110/33071
+STOCKHOLM:
+    absolute_landlift: 5.3
+    template_latitude: "59\xB0 19' 27''"
+    template_longitude: "18\xB0 04' 55''"
+    template_name: STOCKHOLM (SMHI)
+    template_number: 2069/33057
+UDDEVALLA:
+    absolute_landlift: 5.3
+    template_latitude: "58\xB0 20' 51''"
+    template_longitude: "11\xB0 53' 41''"
+    template_name: UDDEVALLA (SMHI)
+    template_number: 2541/33081
+VARBERG:
+    absolute_landlift: 5.3
+    template_latitude: "57\xB0 06' 00''"
+    template_longitude: "12\xB0 13' 00''"
+    template_name: Varberg (SMHI) nedlagd
+    template_number: 2104/33079
+VIKEN:
+    absolute_landlift: 5.3
+    template_latitude: "56\xB0 08' 32''"
+    template_longitude: "12\xB0 34' 45''"
+    template_name: VIKEN (SMHI)
+    template_number: 2228/33068
+VISBY:
+    absolute_landlift: 5.3
+    template_latitude: "57\xB0 38' 21''"
+    template_longitude: "18\xB0 17' 04''"
+    template_name: VISBY (SMHI)
+    template_number: 2080/33060
+YSTAD:
+    absolute_landlift: 5.3
+    template_latitude: "55\xB0 25' 00''"
+    template_longitude: "13\xB0 49' 00''"
+    template_name: Ystad (SMHI) nedlagd
+    template_number: 2093/33078
+station_list:
+- HAPARANDA
+- KALIX KARLSBORG
+- "KALIX STOR\xD6"
+- "STR\xD6M\xD6REN"
+- "FURU\xD6GRUND"
+- "G\xC5S\xD6REN"
+- RATAN
+- HOLMSUND
+- SKAGSUDDE
+- SKAGSUDDE2
+- LUNDE
+- "DRAGH\xC4LLAN"
+- SPIKARNA
+- "LJUSNE ORRSK\xC4RSKAJEN"
+- "B\xD6NAN"
+- "BJ\xD6RN"
+- FORSMARK
+- LOUDDEN
+- STOCKHOLM
+- "NYN\xC4S FISKEHAMN"
+- LANDSORT NORRA
+- LANDSORT
+- "E4 BRON S\xD6DERT\xC4LJE"
+- "OXEL\xD6SUND VINTERKLASEN"
+- JUTEN
+- MARVIKEN
+- "ARK\xD6"
+- "V\xC4STERVIK"
+- SLITE
+- VISBY
+- SIMPEVARP
+- "\xD6LANDS NORRA UDDE"
+- OSKARSHAMN
+- KALMAR
+- KUNGSHOLMSFORT
+- KARLSHAMN
+- "\xC5HUS"
+- SIMRISHAMN
+- YSTAD
+- YSTAD2
+- "SKAN\xD6R"
+- KLAGSHAMN
+- FLINTEN 16
+- FLINTEN 7
+- "MALM\xD6 HAMN"
+- "MALM\xD6"
+- "BARSEB\xC4CK"
+- HELSINGBORG
+- VIKEN
+- "\xC4NGELHOLM"
+- HALMSTAD
+- FALKENBERG
+- VARBERG
+- VARBERG2
+- RINGHALS
+- ONSALA
+- VINGA2
+- "M\xC5VHOLMSB\xC5DAN"
+- GBG-TORSHAMNEN
+- "T\xC5NGUDDEN GBG HAMN"
+- "G\xD6TEBORG-\xC4LVSBORGSBRON"
+- "G\xD6TEBORG-KLIPPAN"
+- "G\xD6TEBORG-ERIKSBERG"
+- "G\xD6TEBORG-G\xD6TA\xC4LVBRON"
+- "G\xD6TEBORG-RING\xD6N"
+- "G\xD6TEBORG-TINGSTADSTUNNELN"
+- "G\xD6TEBORG-L\xC4RJEHOLM"
+- "G\xD6TEBORG-AGNESBERG"
+- MARSTRAND
+- STENUNGSUND
+- UDDEVALLA
+- KRISTINEBERG
+- BROFJORDEN
+- "SM\xD6GEN"
+- KUNGSVIK
+"\xC4NGELHOLM":
+    absolute_landlift: 5.3
+    template_latitude: "56\xB0 17' 53''"
+    template_longitude: "12\xB0 47' 12''"
+    template_name: "\xC4ngelholm (SMHI) nedlagd"
+    template_number: 2542/33082
+"\xD6LANDS NORRA UDDE":
+    absolute_landlift: 5.3
+    template_latitude: "57\xB0 21' 58''"
+    template_longitude: "17\xB0 05' 50''"
+    template_name: "\xD6LANDS NORRA UDDE (SMHI)"
+    template_number: 2083/33061

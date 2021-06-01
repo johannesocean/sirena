@@ -16,7 +16,7 @@ class StationBase:
     """
     def __init__(self):
         super().__init__()
-        self.attributes = set([])
+        self.added_attributes = set([])
         self._number = None
         self._start_date = None
         self._end_date = None
@@ -25,8 +25,8 @@ class StationBase:
 
     def __setattr__(self, key, value):
         super().__setattr__(key, value)
-        if key != 'attributes' and not key.startswith('_'):
-            self.attributes.add(key)
+        if key != 'added_attributes' and not key.startswith('_'):
+            self.added_attributes.add(key)
 
     @property
     def number(self):
@@ -131,8 +131,22 @@ class MultiStation(dict):
         """
         mapping = {
             'stationName': 'name',
+            'stationIdentity': 'number',
             'wgs84Latitude': 'latitude',
-            'wgs84Longitude': 'longitude'
+            'wgs84Longitude': 'longitude',
+        }
+        samsa_attributes = {
+            'referensvarde': 'ref_value_2000'
         }
         for element in samsa_station_element_list:
-            self.append_new_station(**{mapping.get(e, e): v for e, v in element.items()})
+            d = {}
+            for e, v in element.items():
+                d[mapping.get(e, e)] = v
+                if e == 'attributes':
+                    if isinstance(v, list):
+                        for attr_dict in v:
+                            if attr_dict.get('attributeKey') in samsa_attributes:
+                                mapped_key = samsa_attributes.get(attr_dict.get('attributeKey'))
+                                d[mapped_key] = float(attr_dict.get('attributeValue'))
+
+            self.append_new_station(**d)

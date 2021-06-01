@@ -37,6 +37,12 @@ class AnnualMeanEquation:
         self.calculated = self.ref_value - self.k * (self.year - 2000)
         return self.calculated
 
+    def calculate_apparent_land_uplift(self):
+        """
+        With a linear regression apparent_land_uplift = k
+        """
+        return (self.ref_value - self.k * (self.year - 2001)) - self.calculated
+
     @property
     def single_line(self):
         return '-' * 65
@@ -243,11 +249,10 @@ class Calculator(CalculatorBase):
             res = am()
 
             station_attr.setdefault('annual_mean', round_value(res, nr_decimals=1))
+            station_attr.setdefault('apparent_land_uplift', round_value(k, nr_decimals=2))
+            station_attr.setdefault('summary', am.get_summary_string(self.result.summary2().as_text()))
 
-            self.update_attributes(
-                annual_mean=res,
-                summary=am.get_summary_string(self.result.summary2().as_text()),
-            )
+            self.update_attributes(**station_attr)
 
     def calculate_stats(self, data, parameter):
         data = data.assign(intercept=1., year=lambda x: x.timestamp.dt.year)

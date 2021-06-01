@@ -1,13 +1,20 @@
 description: Writer for excel template
 name: xlsx_template
 writer: !!python/name:sirena.writers.excel_template.ExcelTemplateWriter ''
-template_path:
+export_filename: 'mwreg_sirena.xlsx'
 start_row_index: 9
-coordinate_format: f"{}° {}' {}''"
+coordinate_format: "%s° %s' %s''"
+attributes:
+- template_number
+- template_name
+- template_longitude
+- template_latitude
+- annual_mean
+- apparent_land_uplift
 cell_mapping:
-    number: f"A{}"
-    stations: f"B{}"
-    longitude: f"C{}"
-    latitude: f"D{}"
-    annual_mean: f"G{}"
-    k_value: f"I{}"
+    template_number: "A%s"
+    template_name: "B%s"
+    template_longitude: "C%s"
+    template_latitude: "D%s"
+    annual_mean: "G%s"
+    apparent_land_uplift: "I%s"

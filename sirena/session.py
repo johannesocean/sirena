@@ -5,6 +5,7 @@ Created on 2020-04-07 10:28
 @author: a002028
 
 """
+import os
 import pandas as pd
 
 from sirena.config import Settings, InfoLog, ErrorCapturing
@@ -89,11 +90,29 @@ class Session:
     def write(self, writer=None, writer_kwargs=None, **kwargs):
         """"""
         writer_kwargs = writer_kwargs or {}
+
         for key, item in self.settings.writers[writer].items():
+            if key == 'export_filename':
+                writer_kwargs.setdefault('export_path', os.path.join(self.settings.export_path, item))
             writer_kwargs.setdefault(key, item)
 
-        writer_instance = writer_kwargs['writer'](**writer_kwargs)
+        if 'template' in writer:
+            writer_kwargs.setdefault('template_path', self.settings.settings['paths'].get(writer))
+            data = self._get_template_data(writer_kwargs.get('attributes'))
+        else:
+            data = kwargs.get('data') or None
 
+        writer_instance = writer_kwargs['writer'](**writer_kwargs)
+        writer_instance.write(data)
+
+    def _get_template_data(self, attributes):
+        data = {}
+        for statn in self.settings.stations['station_list']:
+            try:
+                data[statn] = {a: self.stations[statn].__getattribute__(a) for a in attributes}
+            except:
+                data[statn] = {'template_name': statn}
+        return data
 
     def read(self, datasets=None, stations=None, all_stations=None,  **kwargs):
         """"""
@@ -175,11 +194,20 @@ class Session:
         for key, df in dataframes.items():
             stat_obj.append_new_station(
                 name=key,
-                station_attr=self.settings.stations.get(key),
+                # station_attr=self.settings.stations.get(key),
+                station_attr={'ref_value_2000': self.stations[key].ref_value_2000},
                 data=df,
                 parameter=parameter
             )
         return stat_obj
+
+    def store_statistics(self, stats):
+        for station in stats:
+            if station in self.stations:
+                self.stations[station].update_attributes(
+                    annual_mean=stats[station].annual_mean,
+                    apparent_land_uplift=stats[station].apparent_land_uplift
+                )
 
     @property
     def time_window(self):

@@ -1,155 +1,269 @@
 "HAPARANDA":
-    ref_value_2000: 21.0
-    absolute_landlift: 5.3
+#    ref_value_2000: 21.0
     complementary_time_serie: ''
+    template_name: 'Haparanda (SMHI) nedlagd'
+    template_number: '2588/33088'
+    template_latitude: "65° 46' 18''"
+    template_longitude: "23° 54' 11''"
 
 "FURUÖGRUND":
-    ref_value_2000: 17.7
-    absolute_landlift: 5.3
+#    ref_value_2000: 17.7
+    template_name: 'FURUÖGRUND (SMHI)'
+    template_number: '2055/33052'
+    template_latitude: "64° 54' 57''"
+    template_longitude: "21° 13' 50''"
 
 "RATAN":
-    ref_value_2000: 19.2
-    absolute_landlift: 5.3
+#    ref_value_2000: 19.2
+    template_name: 'RATAN (SMHI)'
+    template_number: '2056/33053'
+    template_latitude: "63° 59' 10''"
+    template_longitude: "20° 53' 42''"
 
 "SKAGSUDDE":
-    ref_value_2000: 16.4
-    absolute_landlift: 5.3
+#    ref_value_2000: 16.4
+    template_name: 'Skagsudde (SMHI) nedlagd'
+    template_number: '2321/33054'
+    template_latitude: "63° 11' 26''"
+    template_longitude: "19° 00' 45''"
 
 "DRAGHÄLLAN":
-    ref_value_2000: 16.2
-    absolute_landlift: 5.3
+#    ref_value_2000: 16.2
+    template_name: 'Draghällan (SMHI) nedlagd'
+    template_number: '2062/33074'
+    template_latitude: "62° 20' 00''"
+    template_longitude: "17° 28' 00''"
 
 "SPIKARNA":
-    ref_value_2000: 16.2
-    absolute_landlift: 5.3
+#    ref_value_2000: 16.2
+    template_name: 'SPIKARNA (SMHI)'
+    template_number: '2061/33055'
+    template_latitude: "62° 21' 48''"
+    template_longitude: "17° 31' 52''"
 
 "BJÖRN":
-    ref_value_2000: 17.2
-    absolute_landlift: 5.3
+#    ref_value_2000: 17.2
+    template_name: 'Björn (SMHI) nedlagd'
+    template_number: '2067/33075'
+    template_latitude: "60° 38' 00''"
+    template_longitude: "17° 58' 00''"
 
 "FORSMARK":
-    ref_value_2000: 17.4
-    absolute_landlift: 5.3
+#    ref_value_2000: 17.4
+    template_name: 'FORSMARK (SMHI)'
+    template_number: '2179/33056'
+    template_latitude: "60° 24' 31''"
+    template_longitude: "18° 12' 39''"
 
 "STOCKHOLM":
-    ref_value_2000: 16.5
-    absolute_landlift: 5.3
+#    ref_value_2000: 16.5
+    template_name: 'STOCKHOLM (SMHI)'
+    template_number: '2069/33057'
+    template_latitude: "59° 19' 27''"
+    template_longitude: "18° 04' 55''"
 
 "LANDSORT NORRA":
-    ref_value_2000: 14.4
-    absolute_landlift: 5.3
+#    ref_value_2000: 14.4
+    template_name: 'LANDSORT NORRA (SMHI)'
+    template_number: '2507/33058'
+    template_latitude: "58° 46' 08''"
+    template_longitude: "17° 51' 32''"
 
 "LANDSORT":
-    ref_value_2000: 14.4
-    absolute_landlift: 5.3
+#    ref_value_2000: 14.4
+    template_name: 'Landsort (SMHI) nedlagd'
+    template_number: '2073/33076'
+    template_latitude: "58° 45' 00''"
+    template_longitude: "17° 52' 00''"
 
 "MARVIKEN":
-    ref_value_2000: 15.0
-    absolute_landlift: 5.3
+#    ref_value_2000: 15.0
+    template_name: 'Marviken (SMHI) nedlagd'
+    template_number: '2076/33059'
+    template_latitude: "58° 33' 13''"
+    template_longitude: "16° 50' 14''"
 
 "ARKÖ":
-    ref_value_2000: 15.0
-    absolute_landlift: 5.3
+#    ref_value_2000: 15.0
+    template_name: 'ARKÖ (SMHI)'
+    template_number: '2545/33085'
+    template_latitude: "58° 29' 03''"
+    template_longitude: "16° 57' 38''"
 
 "VISBY":
-    ref_value_2000: 11.5
-    absolute_landlift: 5.3
+#    ref_value_2000: 11.5
+    template_name: 'VISBY (SMHI)'
+    template_number: '2080/33060'
+    template_latitude: "57° 38' 21''"
+    template_longitude: "18° 17' 04''"
 
 "ÖLANDS NORRA UDDE":
-    ref_value_2000: 14.1
-    absolute_landlift: 5.3
+#    ref_value_2000: 14.1
+    template_name: 'ÖLANDS NORRA UDDE (SMHI)'
+    template_number: '2083/33061'
+    template_latitude: "57° 21' 58''"
+    template_longitude: "17° 05' 50''"
 
 "OSKARSHAMN":
-    ref_value_2000: 14.1
-    absolute_landlift: 5.3
+#    ref_value_2000: 14.1
+    template_name: 'OSKARSHAMN (SMHI)'
+    template_number: '2085/33062'
+    template_latitude: "57° 16' 30''"
+    template_longitude: "16° 28' 41''"
 
 "KUNGSHOLMSFORT":
-    ref_value_2000: 13.5
-    absolute_landlift: 5.3
+#    ref_value_2000: 13.5
+    template_name: 'KUNGSHOLMSFORT (SMHI)'
+    template_number: '2088/33063'
+    template_latitude: "56° 06' 19''"
+    template_longitude: "15° 35' 22''"
 
 "SIMRISHAMN":
-    ref_value_2000: 14.3
-    absolute_landlift: 5.3
+#    ref_value_2000: 14.3
+    template_name: 'SIMRISHAMN (SMHI)'
+    template_number: '2320/33064'
+    template_latitude: "55° 33' 27''"
+    template_longitude: "14° 21' 28''"
 
 "YSTAD":
-    ref_value_2000: 14.3
-    absolute_landlift: 5.3
+#    ref_value_2000: 14.3
+    template_name: 'Ystad (SMHI) nedlagd'
+    template_number: '2093/33078'
+    template_latitude: "55° 25' 00''"
+    template_longitude: "13° 49' 00''"
 
 "SKANÖR":
-    ref_value_2000: 14.2
-    absolute_landlift: 5.3
+#    ref_value_2000: 14.2
+    template_name: 'SKANÖR (SMHI)'
+    template_number: '30488/33065'
+    template_latitude: "55° 25' 00''"
+    template_longitude: "12° 49' 47''"
 
 "KLAGSHAMN":
-    ref_value_2000: 11.8
-    absolute_landlift: 5.3
+#    ref_value_2000: 11.8
+    template_name: 'KLAGSHAMN (SMHI)'
+    template_number: '2095/33066'
+    template_latitude: "55° 31' 20''"
+    template_longitude: "12° 53' 37''"
 
 "MALMÖ":
-    ref_value_2000: 11.4
-    absolute_landlift: 5.3
+#    ref_value_2000: 11.4
+    template_name: 'MALMÖ HAMN (SJÖV)'
+    template_number: '68/35152'
+    template_latitude: "55° 36' 49''"
+    template_longitude: "12° 59' 51''"
 
 "BARSEBÄCK":
-    ref_value_2000: 11.0
-    absolute_landlift: 5.3
+#    ref_value_2000: 11.0
+    template_name: 'BARSEBÄCK (SMHI)'
+    template_number: '2099/33067'
+    template_latitude: "55° 45' 23''"
+    template_longitude: "12° 54' 12''"
 
 "VIKEN":
-    ref_value_2000: 6.1
-    absolute_landlift: 5.3
+#    ref_value_2000: 6.1
+    template_name: 'VIKEN (SMHI)'
+    template_number: '2228/33068'
+    template_latitude: "56° 08' 32''"
+    template_longitude: "12° 34' 45''"
 
 "ÄNGELHOLM":
-    ref_value_2000: 6.1
-    absolute_landlift: 5.3
+#    ref_value_2000: 6.1
+    template_name: 'Ängelholm (SMHI) nedlagd'
+    template_number: '2542/33082'
+    template_latitude: "56° 17' 53''"
+    template_longitude: "12° 47' 12''"
 
 "VARBERG":
-    ref_value_2000: 5.9
-    absolute_landlift: 5.3
+#    ref_value_2000: 5.9
+    template_name: 'Varberg (SMHI) nedlagd'
+    template_number: '2104/33079'
+    template_latitude: "57° 06' 00''"
+    template_longitude: "12° 13' 00''"
 
 "RINGHALS":
-    ref_value_2000: 5.9
-    absolute_landlift: 5.3
+#    ref_value_2000: 5.9
+    template_name: 'RINGHALS (SMHI)'
+    template_number: '2105/33069'
+    template_latitude: "57° 14' 59''"
+    template_longitude: "12° 06' 45''"
 
 "ONSALA":
-    ref_value_2000: 5.9
-    absolute_landlift: 5.3
+#    ref_value_2000: 5.9
+    template_name: 'ONSALA (CTH)'
+    template_number: '2544/33084'
+    template_latitude: "57° 23' 31''"
+    template_longitude: "11° 55' 09''"
 
 "GÖTEBORG-ERIKSBERG":
-    ref_value_2000: 8.3
-    absolute_landlift: 5.3
+#    ref_value_2000: 8.3
+    template_name: 'GÖTEBORG-ERIKSBERG (GBG)'
+    template_number: '33096'
+    template_latitude: "57° 41' 48''"
+    template_longitude: "11° 54' 32''"
 
 "GÖTEBORG-GÖTAÄLVBRON":
-    ref_value_2000: 10.8
-    absolute_landlift: 5.3
+#    ref_value_2000: 10.8
+    template_name: 'GÖTEBORG-GÖTAÄLVBRON (GBG)'
+    template_number: '33092'
+    template_latitude: "57° 42' 53''"
+    template_longitude: "11° 58' 01''"
 
 "GÖTEBORG-TINGSTADSTUNNELN":
-    ref_value_2000: 11.1
-    absolute_landlift: 5.3
+#    ref_value_2000: 11.1
+    template_name: 'GÖTEBORG-TINGSTADSTUNNELN (GBG)'
+    template_number: '33093'
+    template_latitude: "57° 43' 23''"
+    template_longitude: "11° 59' 13''"
 
 "GÖTEBORG-LÄRJEHOLM":
-    ref_value_2000: 16.9
-    absolute_landlift: 5.3
+#    ref_value_2000: 16.9
+    template_name: 'GÖTEBORG-LÄRJEHOLM (GBG)'
+    template_number: '33094'
+    template_latitude: "57° 45' 57''"
+    template_longitude: "12° 00' 20''"
 
 "GÖTEBORG-AGNESBERG":
-    ref_value_2000: 18.3
-    absolute_landlift: 5.3
+#    ref_value_2000: 18.3
+    template_name: 'GÖTEBORG-AGNESBERG (GBG)'
+    template_number: '33095'
+    template_latitude: "57° 47' 23''"
+    template_longitude: "12° 00' 36''"
 
 "STENUNGSUND":
-    ref_value_2000: 1.7
-    absolute_landlift: 5.3
+#    ref_value_2000: 1.7
+    template_name: 'STENUNGSUND (SMHI)'
+    template_number: '2110/33071'
+    template_latitude: "58° 05' 36''"
+    template_longitude: "11° 49' 57''"
 
 "UDDEVALLA":
-    ref_value_2000: 0.7
-    absolute_landlift: 5.3
+#    ref_value_2000: 0.7
+    template_name: 'UDDEVALLA (SMHI)'
+    template_number: '2541/33081'
+    template_latitude: "58° 20' 51''"
+    template_longitude: "11° 53' 41''"
 
 "KRISTINEBERG":
-    ref_value_2000: -0.4
-    absolute_landlift: 5.3
+#    ref_value_2000: -0.4
+    template_name: 'KRISTINEBERG (GU)'
+    template_number: '33099'
+    template_latitude: "58° 15' 00''"
+    template_longitude: "11° 27' 00''"
 
 "SMÖGEN":
-    ref_value_2000: -0.8
-    absolute_landlift: 5.3
+#    ref_value_2000: -0.8
+    template_name: 'SMÖGEN (SMHI)'
+    template_number: '2111/33072'
+    template_latitude: "58° 21' 13''"
+    template_longitude: "11° 13' 04''"
 
 "KUNGSVIK":
-    ref_value_2000: -1.0
-    absolute_landlift: 5.3
+#    ref_value_2000: -1.0
+    template_name: 'KUNGSVIK (SMHI)'
+    template_number: '2130/33073'
+    template_latitude: "58° 59' 48''"
+    template_longitude: "11° 07' 38''"
 
 station_list:
 - "HAPARANDA"

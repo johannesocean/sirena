@@ -13,7 +13,7 @@ class PDFWriter(WriterBase):
         super(PDFWriter, self).__init__()
 
     def write(self):
-        # TODO Fix setup in standard structure
+        # TODO Fix setup in standard structure. attributes: input_file, output_file, worksheets ('mwreg')
         input_file = r'C:\Utveckling\sirena\sirena\export\mwreg_sirena.xlsx'
         output_file = input_file.replace('.xlsx', '.pdf')
 

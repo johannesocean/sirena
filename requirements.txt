@@ -5,4 +5,4 @@ PyYAML
 pandas
 matplotlib
 bokeh
-sklearn
+scikit-learn

@@ -34,7 +34,7 @@ stats = session_obj.get_statistics(
     parameter='RH2000_Year.Mean'
 )
 
-session_obj.update_station_info()
+# session_obj.update_station_info()
 
 pp = Plot(
     stations=session_obj.stations,

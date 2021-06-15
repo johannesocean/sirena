@@ -192,6 +192,7 @@ class Session:
         stat_obj = Statistics(calculation_year=stats_for_year)
 
         for key, df in dataframes.items():
+            print(key)
             stat_obj.append_new_station(
                 name=key,
                 # station_attr=self.settings.stations.get(key),

@@ -14,7 +14,7 @@ from sirena.plotting.widgets import Plot
 
 session_obj = Session(
     reader='wiski',
-    station_source='wiski',
+    station_source='samsa',
     start_time='1700-01-01',
     end_time='2020-12-31',
 )
@@ -36,10 +36,10 @@ stats = session_obj.get_statistics(
 
 session_obj.update_station_info()
 
-# pp = Plot(
-#     stations=session_obj.stations,
-#     statistics=stats,
-#     output_filename=os.path.join(session_obj.settings.base_directory, "export", "SMISK_VIZ_tst.html")
-# )
-#
-# pp.show_plot()
+pp = Plot(
+    stations=session_obj.stations,
+    statistics=stats,
+    output_filename=os.path.join(session_obj.settings.base_directory, "export", "SMISK_VIZ_tst.html")
+)
+
+pp.show_plot()

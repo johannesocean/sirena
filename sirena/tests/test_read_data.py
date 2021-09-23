@@ -11,17 +11,22 @@ from sirena.session import Session
 if __name__ == '__main__':
     session_obj = Session(
         reader='wiski',
-        station_source='wiski',
+        station_source='samsa',
         start_time='1700-01-01',
         end_time='2019-12-31',
     )
+    example_statn = 'RATAN'
+    print('Station attributes: {}'.format(session_obj.stations[example_statn].added_attributes))
 
     selected_dataset = 'annual_RH2000'
-    print('Read data..')
-    # start_time = time.time()
-    # dfs = session_obj.read(
-    #     all_stations=True,
-    #     datasets=[selected_dataset],
-    # )
+    print('\nRead data.. (~5 seconds)')
+    dfs = session_obj.read(
+        all_stations=True,
+        datasets=[selected_dataset],
+    )
 
-    # session_obj.stations['RATAN']
+    print('\nData loaded for the following stations: {}'.format(list(dfs[selected_dataset])))
+    print('\nData example for station: {}\n{}'.format(
+        example_statn,
+        dfs[selected_dataset][example_statn])
+    )

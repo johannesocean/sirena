@@ -125,11 +125,11 @@ def get_file_name(file_path):
     return os.path.splitext(os.path.basename(file_path))[0]
 
 
-def generate_filepaths(directory: str, pattern=''):
+def generate_filepaths(directory, endswith=''):
     """Generate file paths."""
-    for path, _, fids in os.walk(directory):
+    for path, subdir, fids in os.walk(directory):
         for f in fids:
-            if pattern in f:
+            if f.endswith(endswith):
                 yield os.path.abspath(os.path.join(path, f))
 
 

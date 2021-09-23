@@ -6,7 +6,7 @@ Created on 2020-10-01 12:34
 @author: a002028
 """
 import requests
-import urllib
+# import urllib
 
 
 def get_periods(src, dest):

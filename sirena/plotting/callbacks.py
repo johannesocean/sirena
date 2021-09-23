@@ -57,14 +57,14 @@ def station_callback(plot_source=None, data_source=None, station_source=None,
     code = """
     // Get data from python dictionary
     var selected_data = {
-        year: [], 
-        iv_l: [], 
-        iv_u: [], 
-        ci_l: [], 
-        ci_u: [], 
-        running_mean: [], 
-        fitted_values: [], 
-        additional_regression: [], 
+        year: [],
+        iv_l: [],
+        iv_u: [],
+        ci_l: [],
+        ci_u: [],
+        running_mean: [],
+        fitted_values: [],
+        additional_regression: [],
         data_values: []
     };
     var data = source;
@@ -74,8 +74,8 @@ def station_callback(plot_source=None, data_source=None, station_source=None,
     var selected_index = station_source.selected.indices[0];
     var station = station_source.data.STATN[selected_index];
     var text_values = {
-        ref_value_2000: station_source.data.ref_value_2000[selected_index].toString(), 
-        absolute_landlift: station_source.data.absolute_landlift[selected_index].toString(), 
+        ref_value_2000: station_source.data.ref_value_2000[selected_index].toString(),
+        absolute_landlift: station_source.data.absolute_landlift[selected_index].toString(),
         k_value: station_source.data.k_value[selected_index].toString()
     };
 

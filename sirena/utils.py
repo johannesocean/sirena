@@ -127,7 +127,7 @@ def get_file_name(file_path):
 
 def generate_filepaths(directory, endswith=''):
     """Generate file paths."""
-    for path, subdir, fids in os.walk(directory):
+    for path, _, fids in os.walk(directory):
         for f in fids:
             if f.endswith(endswith):
                 yield os.path.abspath(os.path.join(path, f))

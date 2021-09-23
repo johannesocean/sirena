@@ -11,6 +11,7 @@ Python 3 library developed at SMHI.
 - Use Statmodels to calculate statistics
 - Visualize in bokeh plot
 
+"Local settings" must be copied from your internal network.
 
 🤔 How to contribute
 ---------------------

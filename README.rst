@@ -23,7 +23,7 @@ hurt readability. Sirena follows
 `Google Style Docstrings <http://sphinxcontrib-napoleon.readthedocs.io/en/latest/example_google.html>`_
 for all code API documentation.
 
-Having said that the current code does require some modification and restructuring.
+Having said that, the current code does require some modification and restructuring.
 
 **Fork this repository**
 

@@ -84,5 +84,6 @@ class SAMSAData(SAMSABase):
             data = data.get('data')
         except requests.exceptions.RequestException as e:
             print('Could not load data.')
+            print(e)
             # logging.warning('Could not load data.')
         return data

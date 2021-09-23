@@ -6,7 +6,8 @@ Created on 2020-04-09 17:26
 @author: a002028
 """
 from bokeh.io import output_notebook
-from bokeh.models import ColumnDataSource, Slider, PreText, Circle, TapTool, HoverTool, WheelZoomTool, ResetTool, PanTool, SaveTool,  LassoSelectTool
+from bokeh.models import ColumnDataSource, Slider, PreText, Circle, TapTool, \
+    HoverTool, WheelZoomTool, ResetTool, PanTool, SaveTool, LassoSelectTool
 from bokeh.layouts import grid, row, column
 from bokeh.plotting import figure, show, output_file
 from bokeh.tile_providers import get_provider, Vendors
@@ -20,8 +21,8 @@ def convert_projection(lats, lons):
     From WGS84 --> Google projection
     To find your EPSG check this website: http://spatialreference.org/ref/epsg/.
     """
-    project_projection = pyproj.Proj({'init': 'epsg:4326', 'no_defs': True}, preserve_flags=True)  # wgs84
-    google_projection = pyproj.Proj({'init': 'epsg:3857', 'no_defs': True}, preserve_flags=True)  # default google projection
+    project_projection = pyproj.Proj({'init': 'epsg:4326', 'no_defs': True}, preserve_flags=True)
+    google_projection = pyproj.Proj({'init': 'epsg:3857', 'no_defs': True}, preserve_flags=True)
 
     x, y = pyproj.transform(
         project_projection,
@@ -74,10 +75,15 @@ class Plot:
 
     def _setup_position_source(self, stations):
         """Set bokeh ColumnDataSource for stations."""
-        position_df = {k: [] for k in ('STATN', 'LATIT', 'LONGI', 'LATIT_DD', 'LONGI_DD', 'ref_value_2000', 'absolute_landlift', 'k_value')}
+        position_df = {
+            k: [] for k in ('STATN', 'LATIT', 'LONGI', 'LATIT_DD',
+                            'LONGI_DD', 'ref_value_2000', 'absolute_landlift', 'k_value')
+        }
         if stations:
             for _, statn_obj in stations.items():
-                if statn_obj.latitude and statn_obj.longitude and statn_obj.name in self.statistics:
+                if statn_obj.latitude \
+                        and statn_obj.longitude \
+                        and statn_obj.name in self.statistics:
                     position_df['STATN'].append(statn_obj.name)
                     position_df['LATIT'].append(statn_obj.latitude)
                     position_df['LONGI'].append(statn_obj.longitude)
@@ -116,9 +122,12 @@ class Plot:
     def _setup_text_inputs(self):
         """Set text objects."""
         self.text_inputs = [
-            TextInputWidget(label='Absolute land uplift:', button_label='Save', name='absolute_landlift'),
-            TextInputWidget(label='Apparent land uplift:', button_label='Save', name='apparent_landlift'),
-            TextInputWidget(label='Ref-value (RH2000):', button_label='Save', name='ref_value_2000'),
+            TextInputWidget(label='Absolute land uplift:',
+                            button_label='Save', name='absolute_landlift'),
+            TextInputWidget(label='Apparent land uplift:',
+                            button_label='Save', name='apparent_landlift'),
+            TextInputWidget(label='Ref-value (RH2000):',
+                            button_label='Save', name='ref_value_2000'),
             TextInputWidget(label='k-value:', button_label='Save', name='k_value'),
             TextInputWidget(label='Equation:', button_label='Save', name='equation'),
         ]
@@ -179,7 +188,7 @@ class Plot:
         self.slider.js_on_change('value', slider_callback(source=self.plot_source))
 
     def plot_stations(self):
-        """plot bokeh circles on map-object."""
+        """Plot bokeh circles on map-object."""
         renderer = self.map.circle(
             'LONGI', 'LATIT',
             source=self.position_source,
@@ -222,25 +231,34 @@ class Plot:
         self.plot.ygrid.band_fill_color = "black"
         # self.plot.toolbar.active_scroll = self.temp.select_one(WheelZoomTool)
 
-        self.plot.line('year', 'data_values', color="blue", line_width=0.5, alpha=0.4, source=self.plot_source, legend_label='Data')
-        self.plot.cross('year', 'data_values', color="blue", size=4, alpha=0.5, source=self.plot_source, legend_label='Data')
-        self.plot.line('year', 'running_mean', color="purple", line_width=2, alpha=0.5, source=self.plot_source, legend_label='Running mean')
-        self.plot.line('year', 'fitted_values', color="black", line_width=1, alpha=0.7, source=self.plot_source, legend_label='OLS')
-        self.plot.line('year', 'iv_u', color="orange", line_dash='dashed', line_width=1, alpha=0.5, source=self.plot_source, legend_label='95% prediction interval')
-        self.plot.line('year', 'iv_l', color="orange", line_dash='dashed', line_width=1, alpha=0.5, source=self.plot_source, legend_label='95% prediction interval')
-        self.plot.line('year', 'ci_u', color="red", line_dash='dashed', line_width=1, alpha=0.7, source=self.plot_source, legend_label='95% confidence interval')
-        self.plot.line('year', 'ci_l', color="red", line_dash='dashed', line_width=1, alpha=0.7, source=self.plot_source, legend_label='95% confidence interval')
+        self.plot.line('year', 'data_values', color="blue", line_width=0.5,
+                       alpha=0.4, source=self.plot_source, legend_label='Data')
+        self.plot.cross('year', 'data_values', color="blue", size=4, alpha=0.5,
+                        source=self.plot_source, legend_label='Data')
+        self.plot.line('year', 'running_mean', color="purple", line_width=2,
+                       alpha=0.5, source=self.plot_source, legend_label='Running mean')
+        self.plot.line('year', 'fitted_values', color="black", line_width=1,
+                       alpha=0.7, source=self.plot_source, legend_label='OLS')
+        self.plot.line('year', 'iv_u', color="orange", line_dash='dashed', line_width=1, alpha=0.5,
+                       source=self.plot_source, legend_label='95% prediction interval')
+        self.plot.line('year', 'iv_l', color="orange", line_dash='dashed', line_width=1, alpha=0.5,
+                       source=self.plot_source, legend_label='95% prediction interval')
+        self.plot.line('year', 'ci_u', color="red", line_dash='dashed', line_width=1, alpha=0.7,
+                       source=self.plot_source, legend_label='95% confidence interval')
+        self.plot.line('year', 'ci_l', color="red", line_dash='dashed', line_width=1, alpha=0.7,
+                       source=self.plot_source, legend_label='95% confidence interval')
 
-        self.plot.line('year', 'additional_regression', color="green", line_width=2, alpha=0.5, source=self.plot_source, legend_label='Regression Test')
+        self.plot.line('year', 'additional_regression', color="green", line_width=2,
+                       alpha=0.5, source=self.plot_source, legend_label='Regression Test')
 
         self.plot.legend.location = "top_right"
         self.plot.legend.click_policy = "hide"
 
     def show_plot(self):
         """Show bokeh plot layoyt"""
-        l = grid([
+        layout_grid = grid([
             row([
                 column([self.map, self.plot, self.slider]),
                 column([*[t.layout for t in self.text_inputs], self.text])])],
             sizing_mode='stretch_both')
-        show(l)
+        show(layout_grid)

@@ -34,7 +34,7 @@ class AnnualMeanEquation:
         return self.calculated
 
     def calculate_apparent_land_uplift(self):
-        """ Return apparent land uplift.
+        """Return apparent land uplift.
 
         With a linear regression apparent_land_uplift = k
         """
@@ -48,7 +48,7 @@ class AnnualMeanEquation:
     @property
     def dubble_line(self):
         """Return dubble line."""
-        return '='*65
+        return '=' * 65
 
     def get_summary_string(self, summary):
         """Return statistical data summary."""
@@ -59,7 +59,7 @@ class AnnualMeanEquation:
             self.single_line,
             self.equation_string,
             self.dubble_line,
-            summary[start_idx+1:]
+            summary[start_idx + 1:]
         ))
 
     @property
@@ -136,6 +136,7 @@ class OLSPolynomialRegression:
     Source:
     https://ostwalprasad.github.io/machine-learning/Polynomial-Regression-using-statsmodel.html
     """
+
     def __init__(self, *args, data=None, parameter=None, polynomial_degree=None, **kwargs):
         """Initialize."""
         self.df = data

@@ -126,6 +126,7 @@ class WiskiGeo(Wiski):
     Relevant for e.g. FerryBox data.
     If used, we might want to process this data in another fashion than ordinary timeseries..
     """
+
     def __init__(self):
         """Initialize."""
         super(Wiski, self).__init__()

@@ -21,6 +21,10 @@ class Session:
     #  2. csv export av stationer med valid tidsserie
 
     def __init__(self, reader=None, station_source=None, start_time=None, end_time=None):
+        """Initialize.
+
+        More to come.
+        """
         self.settings = Settings()
         self.stations = MultiStation()
 
@@ -105,11 +109,11 @@ class Session:
         for statn in self.settings.stations['station_list']:
             try:
                 data[statn] = {a: self.stations[statn].__getattribute__(a) for a in attributes}
-            except:
+            except Exception:
                 data[statn] = {'template_name': statn}
         return data
 
-    def read(self, datasets=None, stations=None, all_stations=None,  **kwargs):
+    def read(self, datasets=None, stations=None, all_stations=None, **kwargs):
         """Read data.
 
         More description to come..
@@ -164,7 +168,7 @@ class Session:
             for channel in reader_container.get('channels'):
                 reader.update_attributes(channel=channel)
                 try:
-                    #TODO set timestamp as index?
+                    # TODO set timestamp as index?
                     df_channel = reader.get_data(as_dataframe=True)
                     if df.empty:
                         df = df_channel

@@ -33,6 +33,4 @@ if __name__ == '__main__':
     )
 
     session_obj.store_statistics(stats)
-
-
     session_obj.write('xlsx_template')

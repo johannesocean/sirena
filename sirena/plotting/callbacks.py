@@ -7,7 +7,6 @@ Created on 2020-04-17 09:50
 """
 from bokeh.models import Button, FileInput, CustomJS, TextInput
 from bokeh.layouts import row, column, Spacer
-from bokeh.models.widgets import Select
 from bokeh.events import ButtonClick
 from functools import partial
 
@@ -21,6 +20,7 @@ def get_download_widget():
 
 
 def get_file_widget():
+    """Return FileInput widget."""
     # button_input = FileInput(accept=".csv,.txt")
     button_input = FileInput()
 
@@ -39,7 +39,8 @@ class TextInputWidget(dict):
         self['text_obj'].js_on_change("value", CustomJS(code="""
             console.log('text_input: value=' + this.value, this.toString())
         """))
-        self['button'] = Button(label=kwargs.get('button_label') or 'Save', width=50, button_type='success')
+        self['button'] = Button(label=kwargs.get('button_label') or 'Save',
+                                width=50, button_type='success')
         self['button'].on_event(ButtonClick, partial(self.callback, text=self['text_obj']))
 
         self.layout = row([self['text_obj'], column([Spacer(height=18), self['button']])])
@@ -50,18 +51,33 @@ class TextInputWidget(dict):
         print('text.value', text.value)
 
 
-def station_callback(plot_source=None, data_source=None, station_source=None, text_source=None, text_input_list=None):
+def station_callback(plot_source=None, data_source=None, station_source=None,
+                     text_source=None, text_input_list=None):
     """JS callback for stations in GUI."""
     code = """
     // Get data from python dictionary
-    var selected_data = {year: [], iv_l: [], iv_u: [], ci_l: [], ci_u: [], running_mean: [], fitted_values: [], additional_regression: [], data_values: []};
+    var selected_data = {
+        year: [], 
+        iv_l: [], 
+        iv_u: [], 
+        ci_l: [], 
+        ci_u: [], 
+        running_mean: [], 
+        fitted_values: [], 
+        additional_regression: [], 
+        data_values: []
+    };
     var data = source;
     var text_input_list = text_input_list;
 
     // Get indices array of all selected items (in this case stations on the map)
     var selected_index = station_source.selected.indices[0];
     var station = station_source.data.STATN[selected_index];
-    var text_values = {ref_value_2000: station_source.data.ref_value_2000[selected_index].toString(), absolute_landlift: station_source.data.absolute_landlift[selected_index].toString(), k_value: station_source.data.k_value[selected_index].toString()}; 
+    var text_values = {
+        ref_value_2000: station_source.data.ref_value_2000[selected_index].toString(), 
+        absolute_landlift: station_source.data.absolute_landlift[selected_index].toString(), 
+        k_value: station_source.data.k_value[selected_index].toString()
+    };
 
     // console.log('selected station', station)
     var txt_name;
@@ -113,12 +129,11 @@ def slider_callback(source=None):
     code = """
     var data = source.data;
     var selected_year = cb_obj.value;
-
     var x_values = data['year'];
     var y_values = data['data_values'];
-    
+
     //console.log('y_values', y_values)
-    
+
     var sum_x = 0;
     var sum_y = 0;
     var sum_xy = 0;
@@ -156,10 +171,10 @@ def slider_callback(source=None):
         //console.log('x', x)
         y = x * m + b;
         result_values_y.push(y);
-    }    
-    
+    }
+
     //console.log('result_values_y', result_values_y)
-    
+
     data['additional_regression'] = result_values_y;
     source.change.emit();
     """

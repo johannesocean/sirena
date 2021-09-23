@@ -32,7 +32,7 @@ class ExcelTemplateWriter(WriterBase):
         ws = self.workbook[self.template_sheetname]
 
         row_number = self.start_row_index or 0
-        for statn, item in data.items():
+        for item in data.values():
             for attr, value in item.items():
                 cell_id = self.cell_mapping.get(attr) % row_number
                 ws[cell_id] = value

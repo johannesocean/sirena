@@ -10,6 +10,7 @@ from folium.plugins import MarkerCluster
 
 
 def get_html_string_format(*args):
+    """Return html object."""
     s = '<b>'
     for a in args:
         new_line = a + ': %s<br>'

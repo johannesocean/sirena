@@ -10,8 +10,9 @@ import urllib
 
 
 def get_periods(src, dest):
-    src_enc = urllib.parse.quote_plus(src)
-    dest_enc = urllib.parse.quote_plus(dest)
+    """Get periods."""
+    # src_enc = urllib.parse.quote_plus(src)
+    # dest_enc = urllib.parse.quote_plus(dest)
     cookies = None
     try:
         # FIXME se wiki
@@ -32,6 +33,6 @@ def get_periods(src, dest):
             print(period['rating']['name'])
     finally:
         if cookies is not None:
-            #FIXME se wiki
+            # FIXME se wiki
             url_close = None
             requests.put(url_close, cookies=cookies)

@@ -142,7 +142,7 @@ def get_subdirectories(directory):
 def get_filepaths_from_directory(directory):
     """Generate file paths."""
     return [os.path.join(directory, fid) for fid in os.listdir(directory)
-            if not os.path.isdir(directory+fid)]
+            if not os.path.isdir(directory + fid)]
 
 
 def get_datetime(date_string, time_string):
@@ -185,9 +185,8 @@ def get_file_list_based_on_suffix(file_list, suffix):
 
 
 def is_sequence(arg):
-    """Checks if an object is iterable (you can loop over it) and not a string."""
-    return (not hasattr(arg, "strip") and
-            hasattr(arg, "__iter__"))
+    """Check if an object is iterable (you can loop over it) and not a string."""
+    return not hasattr(arg, "strip") and hasattr(arg, "__iter__")
 
 
 def recursive_dict_update(d, u):

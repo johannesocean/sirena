@@ -1,13 +1,12 @@
-# -*- coding: utf-8 -*-
+# Copyright (c) 2020 SMHI, Swedish Meteorological and Hydrological Institute
+# License: MIT License (see LICENSE.txt or http://opensource.org/licenses/mit).
 """
 Created on 2020-04-07 10:28
 
 @author: a002028
-
 """
 import os
 import pandas as pd
-
 from sirena.config import Settings, InfoLog, ErrorCapturing
 from sirena.core.station import MultiStation
 from sirena.core.data_handler import DataFrames
@@ -15,12 +14,12 @@ from sirena.core.calculator import Statistics
 
 
 class Session:
-    """
-    # TODO:
-        1. Beräkning:
-        2. csv export av stationer med valid tidsserie
+    """Main class of sirena."""
 
-    """
+    # TODO:
+    #  1. Beräkning
+    #  2. csv export av stationer med valid tidsserie
+
     def __init__(self, reader=None, station_source=None, start_time=None, end_time=None):
         self.settings = Settings()
         self.stations = MultiStation()
@@ -33,9 +32,7 @@ class Session:
         self.end_time = pd.Timestamp(end_time)
 
     def create_station_source_connection(self, source):
-        """
-        :return:
-        """
+        """Create connection to data sources."""
         if source == 'wiski':
             assert 'stations' in self.readers
             reader = self.readers['stations'].get('reader')
@@ -55,20 +52,13 @@ class Session:
         self.update_station_info()
 
     def update_station_info(self):
-        """
-        :return:
-        """
+        """Update station information."""
         for key, item in self.settings.stations.items():
             if key in self.stations:
                 self.stations[key].update_attributes(**item)
 
     def create_reader_instances(self, reader=None):
-        """
-        Find readers and return their instances
-        :param data_sets: iterator of strings
-        :param reader: string
-        :return: Dictionary, reader instances
-        """
+        """Find readers and return their instances."""
         reader_instances = {}
         for dataset, dictionary in self.settings.readers[reader]['datasets'].items():
             data_type = self.settings.readers[reader]['data_types'][dictionary['data_type']]
@@ -80,24 +70,28 @@ class Session:
 
     @staticmethod
     def load_reader(data_type):
-        """
-        :param data_type: Dictionary
-        :return: Reader instance
-        """
+        """Return reader instance."""
         reader_instance = data_type.get('reader')
         return reader_instance()
 
     def write(self, writer=None, writer_kwargs=None, **kwargs):
-        """"""
+        """Write to file.
+
+        More description to come..
+        """
         writer_kwargs = writer_kwargs or {}
 
         for key, item in self.settings.writers[writer].items():
             if key == 'export_filename':
-                writer_kwargs.setdefault('export_path', os.path.join(self.settings.export_path, item))
+                writer_kwargs.setdefault('export_path',
+                                         os.path.join(self.settings.export_path, item))
+            if 'path' in item:
+                item = os.path.join(self.settings.base_directory, item)
             writer_kwargs.setdefault(key, item)
 
         if 'template' in writer:
-            writer_kwargs.setdefault('template_path', self.settings.settings['paths'].get(writer))
+            writer_kwargs.setdefault('template_path',
+                                     self.settings.settings['paths'].get(writer))
             data = self._get_template_data(writer_kwargs.get('attributes'))
         else:
             data = kwargs.get('data') or None
@@ -106,6 +100,7 @@ class Session:
         writer_instance.write(data)
 
     def _get_template_data(self, attributes):
+        """Return data to use in template."""
         data = {}
         for statn in self.settings.stations['station_list']:
             try:
@@ -115,7 +110,10 @@ class Session:
         return data
 
     def read(self, datasets=None, stations=None, all_stations=None,  **kwargs):
-        """"""
+        """Read data.
+
+        More description to come..
+        """
         selected_datasets = datasets or ['annual_RH2000']
         data_dictionary = {}
         for dataset_setting in selected_datasets:
@@ -134,7 +132,8 @@ class Session:
         return data_dictionary
 
     def _read_datasets(self, reader_container, station_list):
-        """
+        """Read data from sources.
+
         start_date = pd.Timestamp('1700-01-01')
         end_date = pd.Timestamp('2020-12-31')
 
@@ -145,7 +144,6 @@ class Session:
                                     'channel': '',
                                     'time_window': (start_date, end_date)})
         df = reader.get_data()
-
         """
         reader = reader_container.get('reader')
         reader.update_attributes(
@@ -189,6 +187,10 @@ class Session:
         return dfs
 
     def get_statistics(self, dataframes, parameter=None, stats_for_year=None):
+        """Get statistics.
+
+        More description to come..
+        """
         stat_obj = Statistics(calculation_year=stats_for_year)
 
         for key, df in dataframes.items():
@@ -203,6 +205,7 @@ class Session:
         return stat_obj
 
     def store_statistics(self, stats):
+        """Save data to station object."""
         for station in stats:
             if station in self.stations:
                 self.stations[station].update_attributes(
@@ -212,4 +215,5 @@ class Session:
 
     @property
     def time_window(self):
+        """Return time window."""
         return self.start_time, self.end_time

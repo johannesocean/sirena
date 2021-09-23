@@ -10,11 +10,13 @@ import pandas as pd
 
 
 class StationBase:
-    """
-    Base for Station objects.
+    """Base for Station objects.
+
     Intends to guide attribute settings from station register (either WISKI or SAMSA)
     """
+
     def __init__(self):
+        """Initialize."""
         super().__init__()
         self.added_attributes = set([])
         self._number = None
@@ -24,58 +26,68 @@ class StationBase:
         self._longitude = None
 
     def __setattr__(self, key, value):
+        """Set attribute."""
         super().__setattr__(key, value)
         if key != 'added_attributes' and not key.startswith('_'):
             self.added_attributes.add(key)
 
     @property
     def number(self):
+        """Return number."""
         return self._number
 
     @number.setter
     def number(self, value):
+        """Set number."""
         self._number = str(value)
 
     @property
     def start_date(self):
+        """Return start_date."""
         return self._start_date
 
     @start_date.setter
     def start_date(self, start):
+        """Set start_date."""
         if type(start) == pd.Timestamp:
             start = start.isoformat()
         self._start_date = start
 
     @property
     def end_date(self):
+        """Return end_date."""
         return self._end_date
 
     @end_date.setter
     def end_date(self, end):
+        """Set end_date."""
         if type(end) == pd.Timestamp:
             end = end.isoformat()
         self._end_date = end
 
     @property
     def latitude(self):
+        """Return latitude."""
         return self._latitude
 
     @latitude.setter
     def latitude(self, value):
+        """Set latitude."""
         self._latitude = round(float(value), 6)
 
     @property
     def longitude(self):
+        """Return longitude."""
         return self._longitude
 
     @longitude.setter
     def longitude(self, value):
+        """Set longitude."""
         self._longitude = round(float(value), 6)
 
 
 class Station(StationBase):
-    """
-    Stores meta information for one, and only one, station.
+    """Stores meta information for one, and only one, station.
 
     We intend to insert information from SAMSA (station information database)
 
@@ -86,30 +98,26 @@ class Station(StationBase):
     - absolute_landlift
     - k_value
     - ...
-
     """
+
     def __init__(self):
+        """Initialize."""
         super().__init__()
 
     def update_attributes(self, **kwargs):
-        """
-        :param kwargs:
-        :return:
-        """
+        """Update attributes."""
         for attribute, value in kwargs.items():
             setattr(self, attribute, value)
 
 
 class MultiStation(dict):
-    """
-    Stores meta information for multiple stations.
+    """Stores meta information for multiple stations.
+
     Uses station name as key in this dictionary of Station()-objects
     """
+
     def append_new_station(self, **kwargs):
-        """
-        :param kwargs:
-        :return:
-        """
+        """Append new station."""
         name = kwargs.get('name')
         if name:
             name = name.upper()
@@ -117,18 +125,12 @@ class MultiStation(dict):
             self[name].update_attributes(**kwargs)
 
     def read_from_wiski_elements(self, wiski_station_element_list):
-        """
-        :param wiski_station_element_list:
-        :return:
-        """
+        """Read element from wiski."""
         for element in wiski_station_element_list:
             self.append_new_station(**{e: v for e, v in element.attributes.items()})
 
     def read_from_samsa_elements(self, samsa_station_element_list):
-        """
-        :param samsa_station_element_list:
-        :return:
-        """
+        """Read element from samsa."""
         mapping = {
             'stationName': 'name',
             'stationIdentity': 'number',

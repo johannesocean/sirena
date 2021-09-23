@@ -1,48 +1,45 @@
-# Copyright (c) 2020 SMHI, Swedish Meteorological and Hydrological Institute 
+# Copyright (c) 2020 SMHI, Swedish Meteorological and Hydrological Institute.
 # License: MIT License (see LICENSE.txt or http://opensource.org/licenses/mit).
 """
 Created on 2020-04-07 13:00
 
 @author: a002028
-
 """
 from abc import ABC
-
-import time
 import numpy as np
 import pandas as pd
 import datetime as dt
 
 
 class Frame(pd.DataFrame, ABC):
-    """
-    Stores data from one, and only one, station.
+    """Stores data from one, and only one, station.
 
-    We intend to insert information from the WIKSI database
+    We intend to insert information from the WIKSI database.
     """
 
-    # datetime start date (timestamp.millisecond = 0) https://docs.python.org/3.3/library/datetime.html
+    # datetime start date (timestamp.millisecond = 0)
+    # https://docs.python.org/3.3/library/datetime.html
     # time before this timestamp counts as negative milliseconds
     dt_start = dt.datetime(1970, 1, 1)
 
     @property
     def _constructor(self):
-        """
-        Constructor for Frame, overides method in pd.DataFrame
-        :return: Frame
+        """Construct Frame.
+
+        Constructor for Frame, overides method in pandas.DataFrame.
         """
         return Frame
 
     def convert_formats(self):
-        """
-
-        :return:
-        """
-        self['timestamp'] = self['timestamp'].apply(lambda x: self.dt_start + dt.timedelta(milliseconds=float(x)))
+        """Convert formats of self."""
+        self['timestamp'] = self['timestamp'].apply(
+            lambda x: self.dt_start + dt.timedelta(milliseconds=float(x))
+        )
         self[self.data_columns] = self[self.data_columns].astype(float)
 
     def exclude_flagged_data(self, q_flags=None):
-        """
+        """Exclude flagged data.
+
         By default we exclude values flagged with:
         3 (160) Probably bad
         4 (220) Bad
@@ -60,6 +57,7 @@ class Frame(pd.DataFrame, ABC):
 
     @property
     def data_columns(self):
+        """Return (only) data columns."""
         cols = []
         for c in self.columns:
             if c != 'timestamp' and not c.startswith('Q_'):
@@ -68,6 +66,7 @@ class Frame(pd.DataFrame, ABC):
 
     @property
     def quality_flag_columns(self):
+        """Return (only) flag columns."""
         cols = []
         for c in self.columns:
             if c.startswith('Q_'):
@@ -76,19 +75,16 @@ class Frame(pd.DataFrame, ABC):
 
 
 class DataFrames(dict):
+    """Stores information for multiple stations.
+
+    Use station name as key in this dictionary of Frame()-objects.
     """
-    Stores information for multiple stations.
-    Use station name as key in this dictionary of Frame()-objects
-    """
+
     def append_new_frame(self, **kwargs):
-        """
-        :param kwargs:
-        :return:
-        """
+        """Append new Frame object to self."""
         name = kwargs.get('name')
         data = kwargs.get('data')
         if name:
-            # print('New data added for {}'.format(name))
             self.setdefault(name, Frame(data, columns=kwargs.get('columns')))
             self[name].convert_formats()
             self[name].exclude_flagged_data()

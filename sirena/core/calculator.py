@@ -1,10 +1,9 @@
-# Copyright (c) 2020 SMHI, Swedish Meteorological and Hydrological Institute 
+# Copyright (c) 2020 SMHI, Swedish Meteorological and Hydrological Institute.
 # License: MIT License (see LICENSE.txt or http://opensource.org/licenses/mit).
 """
 Created on 2020-04-07 13:01
 
 @author: a002028
-
 """
 import numpy as np
 import pandas as pd
@@ -13,45 +12,46 @@ import statsmodels.api as sm
 from statsmodels.sandbox.regression.predstd import wls_prediction_std
 from statsmodels.stats.outliers_influence import summary_table
 from sklearn.preprocessing import PolynomialFeatures
-
-
 from sirena.utils import round_value
 
 
 class AnnualMeanEquation:
-    """
-    """
+    """Calculator for annual mean values."""
+
     def __init__(self, *args, ref_value_2000=None, k_value=None, year=None, **kwargs):
+        """Initialize."""
         self.ref_value = ref_value_2000 or np.nan
         self.k = k_value or np.nan
         self.year = year or np.nan
-        # print('self.ref_value, self.k, self.year', self.ref_value, self.k, self.year)
 
     def __call__(self):
-        """
-        Reference year for RH2000 is 2000
+        """Return class calculation.
 
-        calculated_mean__yyyy = ref_value_2000 - k * (yyyy-2000)
-        :return:
+        Reference year for RH2000 is 2000
+        calculated_mean__yyyy = ref_value_2000 - k * (yyyy-2000).
         """
         self.calculated = self.ref_value - self.k * (self.year - 2000)
         return self.calculated
 
     def calculate_apparent_land_uplift(self):
-        """
+        """ Return apparent land uplift.
+
         With a linear regression apparent_land_uplift = k
         """
         return (self.ref_value - self.k * (self.year - 2001)) - self.calculated
 
     @property
     def single_line(self):
+        """Return line."""
         return '-' * 65
 
     @property
     def dubble_line(self):
+        """Return dubble line."""
         return '='*65
 
     def get_summary_string(self, summary):
+        """Return statistical data summary."""
         start_idx = summary.find('* The condition') - 1
         return '\n'.join((
             summary[:start_idx],
@@ -64,6 +64,7 @@ class AnnualMeanEquation:
 
     @property
     def equation_string(self):
+        """Return equation as string."""
         return '{} = {} - {} * ({}-2000)'.format(
             round(self.calculated, 3),
             self.ref_value,
@@ -73,17 +74,18 @@ class AnnualMeanEquation:
 
     @property
     def calculation_string(self):
+        """Return SMHI calculation string."""
         return 'SMHI calculation:    M_(yyyy) = ref_value_2000 - k * (yyyy-2000)'
 
 
 class OLSEquation:
+    """Example calculator for an Ordinary Least Squares model.
+
+    https://www.statsmodels.org/stable/generated/statsmodels.regression.linear_model.OLS.html
     """
-    """
+
     def __init__(self, *args, data=None, parameter=None, **kwargs):
-        """
-        :param args:
-        :param kwargs:
-        """
+        """Initialize."""
         self.df = data
         self.parameter = parameter
         qf_boolean = self.df[self.parameter].isna()
@@ -91,9 +93,7 @@ class OLSEquation:
             self.df.drop(self.df[qf_boolean].index, inplace=True)
 
     def __call__(self):
-        """
-        :return:
-        """
+        """Return class calculation."""
         res = sm.OLS(
             self.df[self.parameter],
             self.df.loc[:, ['year', 'intercept']],
@@ -103,13 +103,13 @@ class OLSEquation:
 
 
 class OLSLinearRegression:
+    """Example calculator for an Ordinary Least Squares model.
+
+    https://www.statsmodels.org/stable/generated/statsmodels.regression.linear_model.OLS.html
     """
-    """
+
     def __init__(self, *args, data=None, parameter=None, **kwargs):
-        """
-        :param args:
-        :param kwargs:
-        """
+        """Initialize."""
         self.df = data
         self.parameter = parameter
         qf_boolean = self.df[self.parameter].isna()
@@ -117,9 +117,7 @@ class OLSLinearRegression:
             self.df.drop(self.df[qf_boolean].index, inplace=True)
 
     def __call__(self):
-        """
-        :return:
-        """
+        """Return class calculation."""
         x = self.df['year'].values
         y = self.df[self.parameter].values
 
@@ -133,16 +131,13 @@ class OLSLinearRegression:
 
 
 class OLSPolynomialRegression:
-    """
+    """Example calculator for an Polynominal Regression model.
+
     Source:
     https://ostwalprasad.github.io/machine-learning/Polynomial-Regression-using-statsmodel.html
-
     """
     def __init__(self, *args, data=None, parameter=None, polynomial_degree=None, **kwargs):
-        """
-        :param args:
-        :param kwargs:
-        """
+        """Initialize."""
         self.df = data
         self.parameter = parameter
         self.polynomial_degree = polynomial_degree or 2
@@ -151,9 +146,7 @@ class OLSPolynomialRegression:
             self.df.drop(self.df[qf_boolean].index, inplace=True)
 
     def __call__(self):
-        """
-        :return:
-        """
+        """Return class calculation."""
         x = self.df['year'].values
         y = self.df[self.parameter].values
 
@@ -169,42 +162,44 @@ class OLSPolynomialRegression:
 
 
 class CalculatorBase:
-    """
-    """
+    """Base class for Node Calculator."""
+
     def __init__(self):
+        """Initialize."""
         super().__init__()
         self.attributes = set([])
 
     def __setattr__(self, key, value):
+        """Set attribute."""
         super().__setattr__(key, value)
         if key != 'attributes' and not key.startswith('_'):
             self.attributes.add(key)
 
     def update_attributes(self, **kwargs):
+        """Update attributes of self."""
         for attribute, value in kwargs.items():
             setattr(self, attribute, value)
 
 
 class Calculator(CalculatorBase):
-    """
-    """
+    """Node Calculator."""
+
     def __init__(self, calculation_year=None):
+        """Initialize."""
         super().__init__()
         self.calc_year = calculation_year
 
     @staticmethod
     def calculate_wls_prediction_std(result):
+        """Calculate and return Weighted Least Squares.
+
+        https://www.statsmodels.org/stable/examples/notebooks/generated/wls.html
         """
-        :return:
-            predstd : array_like, standard error of prediction same length as rows of exog
-            iv_l : array_like, lower confidence bound
-            iv_u : array_like, upper confidence bound
-        """
-        # predstd, iv_l, iv_u = wls_prediction_std(result)
         return wls_prediction_std(result)
 
     @staticmethod
     def get_regression_summary(result, conf_int=0.95, columns=None, as_dataframe=False):
+        """Return regression summary."""
         column_mapper = {
             'Obs': 'obs',
             'Dep Var\nPopulation': 'dep_var_population',
@@ -226,6 +221,10 @@ class Calculator(CalculatorBase):
             return pd.DataFrame(data_table, columns=table_columns)
 
     def calculate_running_mean(self, data, parameter):
+        """Calculate running mean.
+
+        Using climatological normal period of 30 years.
+        """
         running_mean = data[parameter].rolling(
             31,
             center=True,
@@ -235,6 +234,10 @@ class Calculator(CalculatorBase):
         self.update_attributes(running_mean=running_mean)
 
     def calculate_annual_mean_water_level(self, station_attr):
+        """Calculate annual mean water level and update attribute.
+
+        Calculations for a specific station.
+        """
         if station_attr:
             try:
                 k = float(round_value(self.result.params[1], nr_decimals=2)) * -1 or np.nan
@@ -255,6 +258,7 @@ class Calculator(CalculatorBase):
             self.update_attributes(**station_attr)
 
     def calculate_stats(self, data, parameter):
+        """Calculate statistics."""
         data = data.assign(intercept=1., year=lambda x: x.timestamp.dt.year)
 
         # ols = OLSPolynomialRegression(
@@ -288,15 +292,20 @@ class Calculator(CalculatorBase):
 
 
 class Statistics(dict):
-    """
-    Dictionary of stations with applied calculations
-    """
+    """Dictionary of stations with applied calculations."""
+
     def __init__(self, calculation_year=None):
+        """Initialize."""
         super().__init__()
         self.calc_year = calculation_year or datetime.now().year
         print('Calculate annual mean water level for year {}'.format(self.calc_year))
 
     def append_new_station(self, **kwargs):
+        """Append data and calculations to self.
+
+        Args:
+            **kwargs: Station data/information.
+        """
         name = kwargs.get('name')
         if name:
             print('New station added: {}'.format(name))

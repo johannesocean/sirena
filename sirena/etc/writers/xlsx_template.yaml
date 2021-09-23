@@ -2,6 +2,7 @@ description: Writer for excel template
 name: xlsx_template
 writer: !!python/name:sirena.writers.excel_template.ExcelTemplateWriter ''
 export_filename: 'mwreg_sirena.xlsx'
+img_path: 'etc/icons/smhi_sjov.png'
 start_row_index: 9
 coordinate_format: "%s° %s' %s''"
 attributes:

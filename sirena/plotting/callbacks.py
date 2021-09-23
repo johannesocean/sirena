@@ -1,10 +1,9 @@
-# Copyright (c) 2020 SMHI, Swedish Meteorological and Hydrological Institute 
+# Copyright (c) 2020 SMHI, Swedish Meteorological and Hydrological Institute.
 # License: MIT License (see LICENSE.txt or http://opensource.org/licenses/mit).
 """
 Created on 2020-04-17 09:50
 
 @author: a002028
-
 """
 from bokeh.models import Button, FileInput, CustomJS, TextInput
 from bokeh.layouts import row, column, Spacer
@@ -15,10 +14,24 @@ from functools import partial
 
 # FIXME We need to clean this shit up! No parameter hardcoding! Tidy up!!!
 
+def get_download_widget():
+    """Return Button widget."""
+    button = Button(label="Download selected data", button_type="success", width=40)
+    return button
+
+
+def get_file_widget():
+    # button_input = FileInput(accept=".csv,.txt")
+    button_input = FileInput()
+
+    return button_input
+
 
 class TextInputWidget(dict):
-    """"""
+    """Widget to handle text layout."""
+
     def __init__(self, **kwargs):
+        """Initialize."""
         super(TextInputWidget, self).__init__()
         self['name'] = kwargs.get('name')
 
@@ -33,11 +46,12 @@ class TextInputWidget(dict):
 
     @staticmethod
     def callback(text=None):
+        """Print text."""
         print('text.value', text.value)
 
 
 def station_callback(plot_source=None, data_source=None, station_source=None, text_source=None, text_input_list=None):
-    """"""
+    """JS callback for stations in GUI."""
     code = """
     // Get data from python dictionary
     var selected_data = {year: [], iv_l: [], iv_u: [], ci_l: [], ci_u: [], running_mean: [], fitted_values: [], additional_regression: [], data_values: []};
@@ -95,7 +109,7 @@ def station_callback(plot_source=None, data_source=None, station_source=None, te
 
 
 def slider_callback(source=None):
-    """"""
+    """JS callback for sliders in GUI."""
     code = """
     var data = source.data;
     var selected_year = cb_obj.value;
@@ -149,18 +163,4 @@ def slider_callback(source=None):
     data['additional_regression'] = result_values_y;
     source.change.emit();
     """
-
     return CustomJS(args=dict(source=source), code=code)
-
-
-def get_download_widget():
-    """"""
-    button = Button(label="Download selected data", button_type="success", width=40)
-    return button
-
-
-def get_file_widget():
-    # button_input = FileInput(accept=".csv,.txt")
-    button_input = FileInput()
-
-    return button_input

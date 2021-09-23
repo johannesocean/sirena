@@ -1,10 +1,9 @@
-# Copyright (c) 2020 SMHI, Swedish Meteorological and Hydrological Institute 
+# Copyright (c) 2020 SMHI, Swedish Meteorological and Hydrological Institute.
 # License: MIT License (see LICENSE.txt or http://opensource.org/licenses/mit).
 """
 Created on 2020-10-16 15:55
 
 @author: a002028
-
 """
 import folium
 from folium.plugins import MarkerCluster
@@ -20,9 +19,10 @@ def get_html_string_format(*args):
 
 
 class Map:
-    """
-    """
+    """Map."""
+
     def __init__(self, **kwargs):
+        """Initialize."""
         for key, item in kwargs.items():
             setattr(self, key, item)
 
@@ -41,35 +41,22 @@ class Map:
                                                  for key in self.marker_tag_attributes))
 
     def add_to_map(self, list_obj):
-        """
-        :param list_obj:
-        :return:
-        """
+        """Add map to layer controller."""
         self.add_markers_as_cluster(list_obj)
         folium.LayerControl().add_to(self.map)
 
     def write(self, file_path, list_obj):
-        """
-        :param file_path:
-        :param list_obj:
-        :return:
-        """
+        """Write."""
         self.add_to_map(list_obj)
 
         self._write(file_path)
 
     def _write(self, file_path):
-        """
-        :param file_path:
-        :return:
-        """
+        """Save map to file."""
         self.map.save(file_path)
 
     def add_markers_as_cluster(self, stations_list):
-        """
-        :param stations_dict:
-        :return:
-        """
+        """Add group to cluster."""
         fg = self.get_group(
             name='stations',
             add_to_map=True,
@@ -79,22 +66,28 @@ class Map:
         mc = MarkerCluster()
 
         for statn_dict in stations_list:
-            if statn_dict.get('stationName') and statn_dict.get('wgs84Latitude') and statn_dict.get('wgs84Longitude'):
+            if statn_dict.get('stationName') \
+                    and statn_dict.get('wgs84Latitude') \
+                    and statn_dict.get('wgs84Longitude'):
                 html_obj = self.get_html_object(statn_dict)
                 popup = self.get_popup(html_obj)
-                marker = self.get_marker([statn_dict.get('wgs84Latitude'),
-                                          statn_dict.get('wgs84Longitude')],
-                                         popup=popup,
-                                         icon=folium.Icon(color='blue' if statn_dict.get('stationIdentityTypeKey') == 'oceanografisktNummer' else 'green' if statn_dict.get('stationIdentityTypeKey') == 'klimatnummer' else 'red'),
-                                         tooltip=statn_dict.get('stationName') or 'Click me!')
+                marker = self.get_marker(
+                    [statn_dict.get('wgs84Latitude'), statn_dict.get('wgs84Longitude')],
+                    popup=popup,
+                    icon=folium.Icon(
+                        color='blue'
+                        if statn_dict.get('stationIdentityTypeKey') == 'oceanografisktNummer'
+                        else 'green'
+                        if statn_dict.get('stationIdentityTypeKey') == 'klimatnummer'
+                        else 'red'
+                    ),
+                    tooltip=statn_dict.get('stationName') or 'Click me!'
+                )
                 marker.add_to(mc)
         mc.add_to(fg)
 
     def get_group(self, **kwargs):
-        """
-        :param kwargs:
-        :return:
-        """
+        """Return group."""
         fg = folium.FeatureGroup(**kwargs)
 
         if kwargs.get('add_to_map'):
@@ -104,11 +97,7 @@ class Map:
             return fg
 
     def get_html_object(self, item):
-        """
-        :param item:
-        :param list_idx:
-        :return:
-        """
+        """Return html object."""
         args = []
         for tag in self.marker_tag_attributes:
             value = item.get(tag)
@@ -118,17 +107,15 @@ class Map:
 
     @staticmethod
     def get_marker(*args, **kwargs):
-        """
-        :param args:
-        :param kwargs:
-        :return:
-        """
+        """Return marker."""
         return folium.Marker(*args, **kwargs)
 
     @staticmethod
     def get_popup(html_obj):
-        """
-        :param html_obj:
-        :return:
-        """
+        """Return popup object."""
         return folium.Popup(html_obj, max_width=500)
+
+
+if __name__ == '__main__':
+    m = Map()
+    # extend...

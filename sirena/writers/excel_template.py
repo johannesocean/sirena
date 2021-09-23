@@ -1,10 +1,10 @@
-# Copyright (c) 2020 SMHI, Swedish Meteorological and Hydrological Institute 
+# Copyright (c) 2020 SMHI, Swedish Meteorological and Hydrological Institute.
 # License: MIT License (see LICENSE.txt or http://opensource.org/licenses/mit).
 """
 Created on 2021-03-29 13:20
+
 @author: johannes
 """
-import os
 import shutil
 import openpyxl
 from openpyxl import load_workbook
@@ -12,9 +12,10 @@ from sirena.writers.writer import WriterBase
 
 
 class ExcelTemplateWriter(WriterBase):
-    """
-    """
+    """Template writer."""
+
     def __init__(self, template_path=None, export_path=None, cell_mapping=None, **kwargs):
+        """Initialize."""
         super(ExcelTemplateWriter, self).__init__()
         self.workbook_template_path = template_path
         self.export_path = export_path
@@ -24,9 +25,10 @@ class ExcelTemplateWriter(WriterBase):
         for name, item in kwargs.items():
             setattr(self, name, item)
 
-        self.copy_new_woorkbook()
+        self.copy_new_workbook()
 
     def write(self, data):
+        """Write data to excel template."""
         ws = self.workbook[self.template_sheetname]
 
         row_number = self.start_row_index or 0
@@ -38,28 +40,21 @@ class ExcelTemplateWriter(WriterBase):
             if row_number == 50:
                 row_number = 60
 
-        img = openpyxl.drawing.image.Image(r'C:\Utveckling\sirena\sirena\etc\icons\smhi_sjov.png')
-        img.anchor = 'B2'
-        ws.add_image(img)
+        if hasattr(self, 'img_path'):
+            img = openpyxl.drawing.image.Image(self.img_path)
+            img.anchor = 'B2'
+            ws.add_image(img)
+
         self.workbook.template = False
         self.workbook.save(self.export_path)
 
-    def copy_new_woorkbook(self):
+    def copy_new_workbook(self):
+        """Copy template workbook."""
         shutil.copyfile(self.workbook_template_path, self.export_path)
         self.workbook = load_workbook(self.export_path)
 
     def get_new_sheet(self, new_sheet_name):
+        """Return new sheet."""
         ws = self.workbook.copy_worksheet(self.workbook[self.template_sheetname])
         ws.title = new_sheet_name
         return ws
-
-
-if __name__ == '__main__':
-    wd = os.path.dirname(os.path.realpath(__file__))
-    tmp_path = os.path.join(wd, 'etc', 'templates', 'mwreg.xlsx')
-    # export_path = os.path.join(wd, 'export')
-
-    handler = ExcelTemplateWriter(
-        tmp_path=tmp_path,
-        # export_path=export_path,
-    )

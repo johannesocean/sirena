@@ -1,12 +1,11 @@
-# Copyright (c) 2020 SMHI, Swedish Meteorological and Hydrological Institute 
+# Copyright (c) 2020 SMHI, Swedish Meteorological and Hydrological Institute.
 # License: MIT License (see LICENSE.txt or http://opensource.org/licenses/mit).
 """
 Created on 2021-03-29 14:57
+
 @author: johannes
 """
-
 import statsmodels.api as sm
-import numpy as np
 
 
 if __name__ == '__main__':
@@ -16,4 +15,4 @@ if __name__ == '__main__':
     X = sm.add_constant(X)
     model = sm.OLS(Y, X)
     results = model.fit()
-    results.params
+    # results.params

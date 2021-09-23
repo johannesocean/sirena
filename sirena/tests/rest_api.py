@@ -1,10 +1,9 @@
-# Copyright (c) 2020 SMHI, Swedish Meteorological and Hydrological Institute 
+# Copyright (c) 2020 SMHI, Swedish Meteorological and Hydrological Institute.
 # License: MIT License (see LICENSE.txt or http://opensource.org/licenses/mit).
 """
 Created on 2020-10-01 12:34
 
 @author: a002028
-
 """
 import requests
 import urllib
@@ -36,6 +35,3 @@ def get_periods(src, dest):
             #FIXME se wiki
             url_close = None
             requests.put(url_close, cookies=cookies)
-
-
-# get_periods('200/38055/W', '200/38055/Q') # print periods with ratings for hydrological station 17

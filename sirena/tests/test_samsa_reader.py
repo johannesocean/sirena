@@ -1,12 +1,10 @@
-# Copyright (c) 2020 SMHI, Swedish Meteorological and Hydrological Institute 
+# Copyright (c) 2020 SMHI, Swedish Meteorological and Hydrological Institute.
 # License: MIT License (see LICENSE.txt or http://opensource.org/licenses/mit).
 """
 Created on 2020-10-16 15:38
 
 @author: a002028
-
 """
-from sirena.tests.test_folium_map import Map
 from sirena.session import Session
 
 
@@ -21,9 +19,3 @@ if __name__ == '__main__':
     for sname in s.settings.stations.keys():
         if sname not in s.stations.keys():
             print(sname)
-    # m = Map()
-    # m.write(
-    #     'samsa_stations_havsvattenstand.html',
-    #     # new_list
-    #     stations.get('data'),
-    # )

@@ -1,10 +1,9 @@
-# Copyright (c) 2020 SMHI, Swedish Meteorological and Hydrological Institute 
+# Copyright (c) 2020 SMHI, Swedish Meteorological and Hydrological Institute.
 # License: MIT License (see LICENSE.txt or http://opensource.org/licenses/mit).
 """
 Created on 2020-04-09 17:26
 
 @author: a002028
-
 """
 from bokeh.io import output_notebook
 from bokeh.models import ColumnDataSource, Slider, PreText, Circle, TapTool, HoverTool, WheelZoomTool, ResetTool, PanTool, SaveTool,  LassoSelectTool
@@ -12,23 +11,14 @@ from bokeh.layouts import grid, row, column
 from bokeh.plotting import figure, show, output_file
 from bokeh.tile_providers import get_provider, Vendors
 import pyproj
-
 from sirena.plotting.callbacks import station_callback, slider_callback, TextInputWidget
 
 
-"""
-
-Testing of visualization timeseries.
-bokeh plotting (2.0.1)
-
-"""
-
-
 def convert_projection(lats, lons):
-    """
-    :param lats:
-    :param lons:
-    :return:
+    """Transform coordinates from one spatial reference system to another.
+
+    From WGS84 --> Google projection
+    To find your EPSG check this website: http://spatialreference.org/ref/epsg/.
     """
     project_projection = pyproj.Proj({'init': 'epsg:4326', 'no_defs': True}, preserve_flags=True)  # wgs84
     google_projection = pyproj.Proj({'init': 'epsg:3857', 'no_defs': True}, preserve_flags=True)  # default google projection
@@ -43,9 +33,11 @@ def convert_projection(lats, lons):
 
 
 class Plot:
-    """
-    """
-    def __init__(self, stations=None, statistics=None, output_filename=None, as_output_notebook=False):
+    """Main class for bokeh plotting."""
+
+    def __init__(self, stations=None, statistics=None,
+                 output_filename=None, as_output_notebook=False):
+        """Initialize."""
         if as_output_notebook:
             output_notebook()
         else:
@@ -65,7 +57,7 @@ class Plot:
         self.plot_stats()
 
     def _setup_plot_source(self):
-        """"""
+        """Set bokeh ColumnDataSource for GUI plotting."""
         self.plot_source = ColumnDataSource(
             data=dict(
                 year=[],
@@ -81,9 +73,7 @@ class Plot:
         )
 
     def _setup_position_source(self, stations):
-        """
-        :return:
-        """
+        """Set bokeh ColumnDataSource for stations."""
         position_df = {k: [] for k in ('STATN', 'LATIT', 'LONGI', 'LATIT_DD', 'LONGI_DD', 'ref_value_2000', 'absolute_landlift', 'k_value')}
         if stations:
             for _, statn_obj in stations.items():
@@ -104,8 +94,9 @@ class Plot:
         self.position_source = ColumnDataSource(data=position_df)
 
     def _setup_data_source(self):
-        """
-        :return:
+        """Set data source data.
+
+        This data is used for plotting.
         """
         self.data_source = {}
         if self.statistics:
@@ -123,7 +114,7 @@ class Plot:
                 }
 
     def _setup_text_inputs(self):
-        """"""
+        """Set text objects."""
         self.text_inputs = [
             TextInputWidget(label='Absolute land uplift:', button_label='Save', name='absolute_landlift'),
             TextInputWidget(label='Apparent land uplift:', button_label='Save', name='apparent_landlift'),
@@ -133,7 +124,7 @@ class Plot:
         ]
 
     def _setup_map(self):
-        """"""
+        """Set bokeh map figure."""
         pan = PanTool()
         save = SaveTool()
         tap = TapTool()
@@ -168,9 +159,7 @@ class Plot:
         )
 
     def _setup_text_block(self):
-        """
-        :return:
-        """
+        """Set bokeh text object."""
         self.text = PreText(
             text=""" """,
             style={'font-size': '10pt'},
@@ -179,9 +168,7 @@ class Plot:
         )
 
     def _setup_slider_regression(self):
-        """
-        :return:
-        """
+        """Set bokeh slider object."""
         self.slider = Slider(
             start=1850,
             end=2020,
@@ -192,7 +179,7 @@ class Plot:
         self.slider.js_on_change('value', slider_callback(source=self.plot_source))
 
     def plot_stations(self):
-        """"""
+        """plot bokeh circles on map-object."""
         renderer = self.map.circle(
             'LONGI', 'LATIT',
             source=self.position_source,
@@ -217,9 +204,7 @@ class Plot:
         renderer.nonselection_glyph = nonselected_circle
 
     def plot_stats(self):
-        """
-        :return:
-        """
+        """Set statistics plot and add data."""
         self.plot = figure(
             tools="pan,reset,wheel_zoom,lasso_select,save",
             active_drag="lasso_select",
@@ -252,17 +237,10 @@ class Plot:
         self.plot.legend.click_policy = "hide"
 
     def show_plot(self):
-        """
-        :return:
-        """
+        """Show bokeh plot layoyt"""
         l = grid([
             row([
                 column([self.map, self.plot, self.slider]),
                 column([*[t.layout for t in self.text_inputs], self.text])])],
             sizing_mode='stretch_both')
         show(l)
-
-
-if __name__ == '__main__':
-    p = Plot()
-    p.show_plot()

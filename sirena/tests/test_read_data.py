@@ -20,6 +20,8 @@ if __name__ == '__main__':
 
     selected_dataset = 'annual_RH2000'
     print('\nRead data.. (~5 seconds)')
+
+    # Data stored in pandas.DataFrame
     dfs = session_obj.read(
         all_stations=True,
         datasets=[selected_dataset],
